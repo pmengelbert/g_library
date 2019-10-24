@@ -1,40 +1,41 @@
+require 'json'
 require_relative 'common/api_query'
 require_relative 'common/google_api_key'
+require_relative 'classes/user_book'
+require_relative 'classes/book_search'
 
-class Search
-  include ApiQuery
+class UserLibrary
   include Enumerable
 
-  attr_reader :hash
+  attr_accessor :books, :filename
 
-  def initialize(args = {})
-    num_results = args.delete(:num) || 5
-    @q = args.delete(:search) || ""
-    @raw_args = args.map { |k, v| [k.to_s, v] }
-    url_arg_list = make_url_arg_list
+  def initialize(sourcefile = nil)
+    if sourcefile
+      @filename = File.absolute_path(sourcefile)
+      @books = JSON.parse(@filename)
+    else
+      @filename = File.absolute_path("library.json")
+      @books = []
+    end
+  end
 
-    @hash = get_response_hash(BASE_API_URL + url_arg_list)
-    @results = @hash['items'].first(num_results).map { |item| get_volume_info(item) }
+  def add(book)
+    @books << book
+  end
+
+  def save
+    File.write(@filename, to_json)
   end
 
   def each
-    @results.each { |r| yield(r) }
+    @books.each { |b| yield(b) }
   end
 
-  def [](index)
-    @results[index]
+  def to_json
+    a = []
+    @books.each_with_index { |b, i| a << b.info }
+    "{\n" + JSON.pretty_generate(a) + "\n}"
   end
-
-#  private 
-    def make_url_arg_list
-      "&q=" + @q + @raw_args.map do |k, v|
-        k = ("in" + k) if %w[title author publisher].include?(k)
-        "+%s:%s" % [k, v]
-      end.join
-    end
-
-    def get_volume_info(item)
-      item['volumeInfo']
-    end
 
 end
+
