@@ -8,7 +8,7 @@ class BookSearch
 
   attr_reader :selected_results, :full_results
 
-  def initialize(args = {})
+  def initialize(args)
     num_results = args.delete(:num) || 5
     @q = args.delete(:search) || ""
 
@@ -17,7 +17,7 @@ class BookSearch
 
     url_arg_list = make_url_arg_list
 
-    @full_results = get_response_hash(BASE_API_URL + url_arg_list)
+    @full_results = get_response_hash(make_url)
     @selected_results = @full_results['items'].first(num_results)
   end
 
@@ -45,6 +45,10 @@ class BookSearch
 
     def get_volume_info(item)
       item['volumeInfo']
+    end
+
+    def make_url
+      BASE_API_URL + make_url_arg_list
     end
 
 end
