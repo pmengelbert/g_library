@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative 'g_search.rb'
+require_relative '../book_search.rb'
 
 class TestBookSearch < Test::Unit::TestCase
 
