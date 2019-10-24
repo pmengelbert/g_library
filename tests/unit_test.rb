@@ -4,7 +4,7 @@ require_relative '../book_search.rb'
 class TestBookSearch < Test::Unit::TestCase
 
   def setup
-    @s = Search.new(search: "harry", title: "harry potter", author: "rowling")
+    @s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
   end
 
   def test_url_making_function_with_proper_input

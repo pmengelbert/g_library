@@ -6,26 +6,28 @@ class BookSearch
   include ApiQuery
   include Enumerable
 
-  attr_reader :hash
+  attr_reader :selected_results, :full_results
 
   def initialize(args = {})
     num_results = args.delete(:num) || 5
     @q = args.delete(:search) || ""
 
-    raw_args = args.map { |k, v| [k.to_s, v] }
-    url_arg_list = make_url_arg_list(raw_args)
+    @raw_args = args.reject { |k, v| k == :num || k == :search }
+      .map { |k, v| [k.to_s, v] }
 
-    @hash = get_response_hash(BASE_API_URL + url_arg_list)
-    @results = @hash['items'].first(num_results)
+    url_arg_list = make_url_arg_list
+
+    @full_results = get_response_hash(BASE_API_URL + url_arg_list)
+    @selected_results = @full_results['items'].first(num_results)
   end
 
   def each
     return to_enum :each unless block_given?
-    @results.each { |r| yield(r) }
+    @selected_results.each { |r| yield(r) }
   end
 
   def [](index)
-    get_volume_info @results[index]
+    get_volume_info @selected_results[index]
   end
 
   def to_json
@@ -34,8 +36,8 @@ class BookSearch
   end
 
   private 
-    def make_url_arg_list(hash)
-      "&q=" + @q + hash.map do |k, v|
+    def make_url_arg_list
+      "&q=" + @q + @raw_args.map do |k, v|
         k = ("in" + k) if %w[title author publisher].include?(k)
         "+%s:%s" % [k, v]
       end.join
