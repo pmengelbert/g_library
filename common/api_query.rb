@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 
-module Curl
+module ApiQuery
   require 'net/http'
   require 'json'
 
