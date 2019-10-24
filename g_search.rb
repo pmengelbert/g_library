@@ -13,7 +13,7 @@ class UserLibrary
     if sourcefile
       @filename = File.absolute_path(sourcefile)
       file = File.open(@filename)
-      @books = JSON.parse(file.read)['books']
+      @books = JSON.parse(file.read)
     else
       @filename = File.absolute_path("library.json")
       @books = []
@@ -33,8 +33,8 @@ class UserLibrary
   end
 
   def to_json
-    h = { "books": @books.map { |b| b.info } }
-    JSON.pretty_generate(h)
+    a = @books.map { |b| b.info }
+    JSON.pretty_generate(a)
   end
 
 end
