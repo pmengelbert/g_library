@@ -7,6 +7,7 @@ class Search
   attr_reader :hash
 
   def initialize(args = {})
+    @q = args.delete(:search) || ""
     @raw_args = args.map { |k, v| [k.to_s, v] }
     url_arg_list = make_url_arg_list
 
@@ -15,9 +16,9 @@ class Search
 
 #  private 
     def make_url_arg_list
-      @raw_args.map do |k, v|
+      "&q=" + @q + @raw_args.map do |k, v|
         k = ("in" + k) if %w[title author publisher].include?(k)
-        "&%s=%s" % [k, v]
+        "+%s:%s" % [k, v]
       end.join
     end
 
