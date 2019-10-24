@@ -12,7 +12,8 @@ class UserLibrary
   def initialize(sourcefile = nil)
     if sourcefile
       @filename = File.absolute_path(sourcefile)
-      @books = JSON.parse(@filename)
+      file = File.open(@filename)
+      @books = JSON.parse(file.read)['books']
     else
       @filename = File.absolute_path("library.json")
       @books = []
@@ -32,9 +33,8 @@ class UserLibrary
   end
 
   def to_json
-    a = []
-    @books.each_with_index { |b, i| a << b.info }
-    "{\n" + JSON.pretty_generate(a) + "\n}"
+    h = { "books": @books.map { |b| b.info } }
+    JSON.pretty_generate(h)
   end
 
 end
