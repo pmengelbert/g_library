@@ -20,6 +20,7 @@ class BookSearch
   end
 
   def each
+    return to_enum :each unless block_given?
     @results.each { |r| yield(r) }
   end
 

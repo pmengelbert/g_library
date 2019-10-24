@@ -25,6 +25,7 @@ class UserLibrary
   end
 
   def each
+    return to_enum :each unless block_given?
     @books.each { |b| yield(b) }
   end
 
