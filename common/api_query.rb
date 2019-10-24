@@ -5,7 +5,7 @@ module Curl
   require 'net/http'
   require 'json'
 
-  private
+#  private
     def get_response(url)
       Net::HTTP.get_response(URI.parse(url)).body
     end
