@@ -18,20 +18,20 @@ class BookSearch
     url_arg_list = make_url_arg_list
 
     @full_results = get_response_hash(make_url)
-    @selected_results = @full_results['items'].first(num_results)
+    @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
   end
 
   def each
     return to_enum :each unless block_given?
-    @selected_results.each { |r| yield(r) }
+    selected_results.each { |r| yield(r) }
   end
 
   def [](index)
-    add_id_to @selected_results[index]
+    add_id_to selected_results[index]
   end
 
   def to_json
-    JSON.pretty_generate(@selected_results)
+    JSON.pretty_generate(selected_results)
   end
 
   private 
@@ -42,7 +42,7 @@ class BookSearch
       end.join
     end
 
-    def add_id_to(hash)
+    def format_hash(hash)
       hash['volumeInfo'].merge( { 'id' => hash['id'] } )
     end
 
