@@ -25,6 +25,12 @@ OptionParser.new do |opts|
     o[:publisher] = p
   end
 
+  opts.on("-l", "--library", "See your library; ignores all other options") do |p|
+    l = UserLibrary.new("saved_libraries/library.json")
+    l.pretty_print
+    exit
+  end
+
   opts.on("-h", "--help", "Prints this help") do
     puts opts
     puts "[query]: all other arguments will be treated as general search keywords"
@@ -32,6 +38,8 @@ OptionParser.new do |opts|
   end
 
 end.parse!
+
+l = UserLibrary.new("saved_libraries/library.json")
 
 begin
   s = BookSearch.new(search: ARGV.join(' '), title: o[:title], author: o[:author], publisher: o[:publisher])
@@ -52,3 +60,9 @@ rescue SearchError
   puts ""
 end
 
+print "Pick a book to add to your library (or 0 to quit): "
+selection = gets.chomp.to_i
+i = selection - 1
+exit if i == -1
+l.add(UserBook.new(s[i]))
+l.save

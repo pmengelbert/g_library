@@ -51,6 +51,22 @@ class UserLibrary
     JSON.pretty_generate(a)
   end
 
+  def pretty_print
+    puts ""
+    puts ""
+    puts ""
+    each do |b|
+      puts "-"*5 + b['id'] + "-" * 5
+      %w[title author publisher].each do |ind|
+        puts "%s: %s" % [ind.capitalize, b[ind]]
+        puts ""
+      end
+    puts ""
+    puts ""
+    end
+    puts ""
+  end
+
   private
     def valid?(b)
       b.is_a?(UserBook) && b.respond_to?(:info)
