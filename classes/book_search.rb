@@ -12,17 +12,14 @@ class BookSearch
   def initialize(args)
     raise ArgumentError unless (args.keys - [:num]).any? { |k| %i[title author publisher subject isbn lccn oclc].include?(k) }
     num_results = args.delete(:num) || 5
-    @q = args.delete(:search)
+    @q = args.delete(:search) || ""
     args.keys.each do |k|
       args.delete(k) if args[k] == nil || args[k].empty?
     end
 
-    puts args
-
     @raw_args = args.map { |k, v| [k.to_s, v.to_s] }.to_h
 
     url = make_url
-    puts url
 
     @full_results = get_response_hash(url)
     if (num = @full_results['totalItems']) && num > 0 && get_response_code(url) == "200"

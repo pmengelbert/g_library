@@ -43,8 +43,7 @@ begin
     n = i+1
     puts "-"*5 + "Match ##{n}" + "-"*5 
     keys.each do |k|
-      b[k] = "" if b[k].nil?
-      puts "%s: %s" % [k.capitalize, b[k].strip]
+      puts "%s: %s" % [k.capitalize, b[k]]
     end
     puts ""
   end

@@ -2,7 +2,6 @@ require 'json'
 
 class UserBook
 
-  attr_reader :authors
   attr_accessor :title, :publisher, :info, :id
 
   def initialize(args = {})
@@ -19,6 +18,7 @@ class UserBook
   end
 
   def [](key)
+    return authors if key =~ /authors?/i
     info[key]
   end
 
@@ -26,8 +26,12 @@ class UserBook
     @info[key] = value
   end
 
+  def authors
+    @authors.join(', ')
+  end
+
   def author
-    @authors
+    authors
   end
 
   def author=(str)
