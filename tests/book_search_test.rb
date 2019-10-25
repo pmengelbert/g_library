@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../g_library.rb'
+require_relative '../classes/book_search.rb'
 
 class TestBookSearch < Test::Unit::TestCase
 
@@ -8,7 +8,8 @@ class TestBookSearch < Test::Unit::TestCase
   end
 
   def test_url_making_function_with_proper_input
-    assert_equal @s.send(:make_url_arg_list), "&q=harry+intitle:harry potter+inauthor:rowling"
+    assert_equal @s.url,
+      "https://www.googleapis.com/books/v1/volumes?q=harry+intitle:harry+potter+inauthor:rowling"
   end
 
   def test_correct_search_should_get_code_200
@@ -32,11 +33,18 @@ class TestBookSearch < Test::Unit::TestCase
   def test_arguments_should_automatically_be_recast_as_strings
     x = BookSearch.new(title: 1984)
     y = BookSearch.new(title: "1984")
-    assert_equal x.send(:raw_args)['title'], y.send(:raw_args)['title']
+    assert_equal x.send(:args)['title'], y.send(:args)['title']
   end
 
   def test_error_should_be_raised_if_an_argument_cant_be_recast_as_string
     assert_raise( ArgumentError ) { b = BookSearch.new(search: BasicObject.new) }
+  end
+
+  def test_url_generation
+    x = BookSearch.new(search: "michelle", author: "obama", title: "becoming")
+    y = BookSearch.new(author: "obama", title: "becoming")
+    assert_equal x.url, "https://www.googleapis.com/books/v1/volumes?q=michelle+inauthor:obama+intitle:becoming"
+    assert_equal y.url, "https://www.googleapis.com/books/v1/volumes?q=inauthor:obama+intitle:becoming"
   end
 
 end

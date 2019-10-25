@@ -7,7 +7,7 @@ class BookSearch
   include ApiQuery
   include Enumerable
 
-  attr_reader :selected_results, :full_results
+  attr_reader :selected_results, :full_results, :url
 
   def initialize(args)
     @args = args.dup
@@ -17,11 +17,10 @@ class BookSearch
       %i[title author publisher subject isbn lccn oclc].include?(k)
     end
 
-    @args = args.reject { |k, v| v.nil? || v.empty? }.to_h
-    @args = @args.map { |k, v| [k,v].map(&:to_s) }.to_h
+    @args = args.map { |k, v| [k,v].map(&:to_s) }.to_h
+    @args = @args.reject { |k, v| v.empty? }.to_h
 
-    url = make_url
-    pp url
+    @url = make_url
 
     response = get_response(url)
     raise SearchError unless response.code == "200"

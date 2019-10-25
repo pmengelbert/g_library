@@ -78,11 +78,12 @@ rescue NoResults
   exit
 end
 
-print "Pick a book to add to your library (or any other key to quit): "
+print "Pick a book to add to your reading list (or any other key to quit): "
 
 selection = STDIN.getch.chomp.to_i
 i = selection - 1
-exit if i < 0 or i > 4
+puts ""
+exit if i < 0 or i > 4 or !i.is_a?(String)
 
 l.add(UserBook.new(s[i]))
 l.save
