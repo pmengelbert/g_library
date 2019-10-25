@@ -1,6 +1,7 @@
 require 'json'
 require_relative '../common/api_query'
 require_relative '../common/google_api_key'
+require_relative '../common/search_error'
 
 class BookSearch
   include ApiQuery
@@ -11,14 +12,22 @@ class BookSearch
   def initialize(args)
     raise ArgumentError unless (args.keys - [:num]).any? { |k| %i[title author publisher subject isbn lccn oclc].include?(k) }
     num_results = args.delete(:num) || 5
-    @q = args.delete(:search) || ""
+    @q = args.delete(:search)
+    args.keys.each do |k|
+      args.delete(k) if args[k] == nil || args[k].empty?
+    end
 
-    @raw_args = args.map { |k, v| [k.to_s, v.to_s] }.to_h
+    @raw_args = args.reject.map { |k, v| [k.to_s, v.to_s] }.to_h
 
-    url_arg_list = make_url_arg_list
+    url = make_url
+    puts url
 
-    @full_results = get_response_hash(make_url)
-    @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
+    @full_results = get_response_hash(url)
+    if @full_results['totalItems'] > 0 && get_response_code(url) == "200"
+      @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
+    else
+      raise SearchError, "No results"
+    end
   end
 
   def each
@@ -27,7 +36,7 @@ class BookSearch
   end
 
   def [](index)
-    add_id_to selected_results[index]
+    selected_results[index]
   end
 
   def to_json
@@ -36,9 +45,10 @@ class BookSearch
 
   private 
     def make_url_arg_list
-      "&q=" + @q + @raw_args.map do |k, v|
-        k = ("in" + k) if %w[title author publisher].include?(k)
-        "+%s:%s" % [k, v]
+      "&q=" + @q + @raw_args.map.with_index do |pair, i|
+        next if i == 0
+        pair[0] = ("in" + pair[0]) if %w[title author publisher].include?(pair[0])
+        "+%s:%s" % [pair[0], pair[1]]
       end.join
     end
 
@@ -47,7 +57,7 @@ class BookSearch
     end
 
     def make_url
-      BASE_API_URL + make_url_arg_list
+      (BASE_API_URL + make_url_arg_list).gsub(/ /, "+")
     end
 
     def raw_args

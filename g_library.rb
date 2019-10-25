@@ -7,6 +7,7 @@ require_relative 'common/google_api_key'
 require_relative 'classes/book_search'
 require_relative 'classes/user_book'
 require_relative 'classes/user_library'
+require_relative 'common/search_error'
 
 o = {}
 OptionParser.new do |opts|
@@ -32,16 +33,21 @@ OptionParser.new do |opts|
 
 end.parse!
 
-s = BookSearch.new(search: ARGV.join(' '), title: o[:title], author: o[:author], publisher: o[:publisher])
+begin
+  s = BookSearch.new(search: ARGV.join(' '), title: o[:title], author: o[:author], publisher: o[:publisher])
+  books = s.map { |info| UserBook.new(info) }
 
-books = s.map { |info| UserBook.new(info) }
-
-puts ""
-books.each_with_index do |b, i|
-  n = i+1
-  puts "-"*5 + "Match ##{n}" + "-"*5 
-  puts "Title: #{b['title']}"
-  puts "Author: #{b['authors'].join(', ')}"
-  puts "Publisher: #{b['publisher']}"
+  puts ""
+  books.each_with_index do |b, i|
+    n = i+1
+    puts "-"*5 + "Match ##{n}" + "-"*5 
+    puts "Title: #{b['title']}"
+    puts "Author: #{b['authors'].join(', ')}"
+    puts "Publisher: #{b['publisher']}"
+    puts ""
+  end
+rescue SearchError 
+  puts "\nNo results."
   puts ""
 end
+
