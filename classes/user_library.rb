@@ -14,10 +14,15 @@ class UserLibrary
       @filename = File.absolute_path("saved_libraries/library.json")
       @books = []
     end
+    raise "Invalid Data" unless books.all { |b| valid?(b) }
   end
 
   def add(book)
     @books << book
+  end
+
+  def books=(book)
+    add(book)
   end
 
   def save
@@ -30,9 +35,16 @@ class UserLibrary
   end
 
   def to_json
-    a = @books.map { |b| b.info }
+    a = @books.map do |b| 
+      b.info 
+    end
     JSON.pretty_generate(a)
   end
+
+  private
+    def valid?(b)
+      b.respond_to?(:info)
+    end
 
 end
 

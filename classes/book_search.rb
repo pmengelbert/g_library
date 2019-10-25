@@ -27,7 +27,7 @@ class BookSearch
   end
 
   def [](index)
-    get_volume_info @selected_results[index]
+    add_volume_info @selected_results[index]
   end
 
   def to_json
@@ -43,8 +43,8 @@ class BookSearch
       end.join
     end
 
-    def get_volume_info(item)
-      item['volumeInfo']
+    def add_volume_info(hash)
+      hash['volumeInfo'].merge( { 'id' => hash['id'] } )
     end
 
     def make_url
@@ -54,6 +54,5 @@ class BookSearch
     def raw_args
       @raw_args
     end
-
 
 end
