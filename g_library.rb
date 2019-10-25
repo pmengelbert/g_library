@@ -39,11 +39,13 @@ begin
 
   puts ""
   books.each_with_index do |b, i|
+    keys = %w[title author publisher]
     n = i+1
     puts "-"*5 + "Match ##{n}" + "-"*5 
-    puts "Title: #{b['title']}"
-    puts "Author: #{b['authors'].join(', ')}"
-    puts "Publisher: #{b['publisher']}"
+    keys.each do |k|
+      b[k] = "" if b[k].nil?
+      puts "%s: %s" % [k.capitalize, b[k].strip]
+    end
     puts ""
   end
 rescue SearchError 

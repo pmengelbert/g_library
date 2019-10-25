@@ -22,6 +22,10 @@ class UserBook
     info[key]
   end
 
+  def[]=(key, value)
+    @info[key] = value
+  end
+
   def author
     @authors
   end

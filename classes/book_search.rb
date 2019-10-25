@@ -17,13 +17,15 @@ class BookSearch
       args.delete(k) if args[k] == nil || args[k].empty?
     end
 
-    @raw_args = args.reject.map { |k, v| [k.to_s, v.to_s] }.to_h
+    puts args
+
+    @raw_args = args.map { |k, v| [k.to_s, v.to_s] }.to_h
 
     url = make_url
     puts url
 
     @full_results = get_response_hash(url)
-    if @full_results['totalItems'] > 0 && get_response_code(url) == "200"
+    if (num = @full_results['totalItems']) && num > 0 && get_response_code(url) == "200"
       @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
     else
       raise SearchError, "No results"
@@ -46,9 +48,8 @@ class BookSearch
   private 
     def make_url_arg_list
       "&q=" + @q + @raw_args.map.with_index do |pair, i|
-        next if i == 0
         pair[0] = ("in" + pair[0]) if %w[title author publisher].include?(pair[0])
-        "+%s:%s" % [pair[0], pair[1]]
+        (i == 0 ? "%s:%s" : "+%s:%s")  % [pair[0], pair[1]]
       end.join
     end
 
