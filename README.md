@@ -35,7 +35,7 @@ ruby g_library.rb
 You will see output like this:
 
 ```
-Usage: glibrary [options...] [query]
+Usage: ruby g_library.rb [options...] [query]
     -t, --title=TITLE                Specify a title keyword
     -a, --author=AUTHOR              Specify an author keyword
     -p, --publisher=PUBLISHER        Specify a publisher keyword

@@ -16,7 +16,7 @@ filename = File.dirname(File.expand_path(__FILE__)) + "/saved_libraries/library.
 o = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: glibrary [options...] [query]"
+  opts.banner = "Usage: ruby g_library.rb [options...] [query]"
 
   opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
     o[:title] = t
