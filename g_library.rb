@@ -9,9 +9,14 @@ require_relative 'classes/user_book'
 require_relative 'classes/user_library'
 require_relative 'common/search_error'
 
+ARGV << '-h' if ARGV.empty?
+
+filename = File.dirname(File.expand_path(__FILE__)) + "/saved_libraries/library.json"
+
 o = {}
+
 OptionParser.new do |opts|
-  opts.banner = "Usage: glibrary [o...] [query]"
+  opts.banner = "Usage: glibrary [options...] [query]"
 
   opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
     o[:title] = t
@@ -25,21 +30,31 @@ OptionParser.new do |opts|
     o[:publisher] = p
   end
 
-  opts.on("-l", "--library", "See your library; ignores all other options") do |p|
-    l = UserLibrary.new("saved_libraries/library.json")
+  opts.on("-f", "--lib-file=LIBFILE", "Select a library save file") do |libfile|
+    filename = libfile
+  end
+
+  opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
+    l = UserLibrary.new(filename)
+    pp filename
     l.pretty_print
     exit
   end
 
   opts.on("-h", "--help", "Prints this help") do
+    puts ""
     puts opts
     puts "[query]: all other arguments will be treated as general search keywords"
+    puts ""
     exit
   end
 
 end.parse!
 
-l = UserLibrary.new("saved_libraries/library.json")
+pp filename
+
+l = UserLibrary.new(filename)
+
 
 begin
   s = BookSearch.new(search: ARGV.join(' '), title: o[:title], author: o[:author], publisher: o[:publisher])
