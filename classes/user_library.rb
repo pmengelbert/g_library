@@ -3,21 +3,31 @@ require 'json'
 class UserLibrary
   include Enumerable
 
-  attr_accessor :books, :filename
+  attr_reader :books, :filename
 
   def initialize(sourcefile = nil)
+
+    @books = []
+
     if sourcefile
       @filename = File.absolute_path(sourcefile)
-      file = File.open(@filename)
-      @books = JSON.parse(file.read)
+
+      if File.exist?(filename)
+        file = File.open(filename)
+        @books = JSON.parse(file.read).map { |d| UserBook.new(d) }
+      end
     else
       @filename = File.absolute_path("saved_libraries/library.json")
-      @books = []
     end
-    raise "Invalid Data" unless books.all { |b| valid?(b) }
+
+    raise "Invalid Data" unless books.all? { |b| valid?(b) }
   end
 
   def add(book)
+    unless valid?(book)
+      raise "Invalid Data" 
+      return
+    end
     @books << book
   end
 
@@ -26,7 +36,7 @@ class UserLibrary
   end
 
   def save
-    File.write(@filename, to_json)
+    File.write(filename, to_json)
   end
 
   def each
@@ -43,7 +53,11 @@ class UserLibrary
 
   private
     def valid?(b)
-      b.respond_to?(:info)
+      b.is_a?(UserBook) && b.respond_to?(:info)
+    end
+
+    def set_filename(name)
+      @filename = name
     end
 
 end

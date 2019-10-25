@@ -27,12 +27,11 @@ class BookSearch
   end
 
   def [](index)
-    add_volume_info @selected_results[index]
+    add_id_to @selected_results[index]
   end
 
   def to_json
-    h = map { |r| { r['id'] => r['volumeInfo'] } }
-    JSON.pretty_generate(h)
+    JSON.pretty_generate(@selected_results)
   end
 
   private 
@@ -43,7 +42,7 @@ class BookSearch
       end.join
     end
 
-    def add_volume_info(hash)
+    def add_id_to(hash)
       hash['volumeInfo'].merge( { 'id' => hash['id'] } )
     end
 
