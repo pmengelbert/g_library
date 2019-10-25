@@ -7,7 +7,7 @@ class UserBook
   def initialize(args = {})
     @info = args
     @title = args[:title]
-    @author = args[:author]
+    @author = args[:authors]
     @publisher = args[:publisher]
   end
 

@@ -13,8 +13,7 @@ class BookSearch
     num_results = args.delete(:num) || 5
     @q = args.delete(:search) || ""
 
-    @raw_args = args.reject { |k, v| k == :num || k == :search }
-      .map { |k, v| [k.to_s, v] }
+    @raw_args = args.map { |k, v| [k.to_s, v.to_s] }.to_h
 
     url_arg_list = make_url_arg_list
 
@@ -51,5 +50,10 @@ class BookSearch
     def make_url
       BASE_API_URL + make_url_arg_list
     end
+
+    def raw_args
+      @raw_args
+    end
+
 
 end

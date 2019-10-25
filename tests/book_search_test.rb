@@ -15,7 +15,7 @@ class TestBookSearch < Test::Unit::TestCase
     assert_equal @s.send(:get_response_code, @s.send(:make_url)), "200"
   end
   
-  def test_correct_search_should_not_get_code_200
+  def test_incorrect_search_should_not_get_code_200
     url = "https://www.googleapis.com/books/v1/volumes?q=&intitle=harry"
     assert_not_equal @s.send(:get_response_code, url), "200"
   end
@@ -27,6 +27,16 @@ class TestBookSearch < Test::Unit::TestCase
   def test_error_unless_at_least_one_correct_parameter_except_num
     assert_raise( ArgumentError) { b = BookSearch.new(asdf: "hello", qwer: "goodbye") }
     assert_raise( ArgumentError) { b = BookSearch.new(asdf: "hello", num: 4) }
+  end
+
+  def test_arguments_should_automatically_be_recast_as_strings
+    x = BookSearch.new(title: 1984)
+    y = BookSearch.new(title: "1984")
+    assert_equal x.send(:raw_args)['title'], y.send(:raw_args)['title']
+  end
+
+  def test_error_should_be_raised_if_an_argument_cant_be_recast_as_string
+    assert_raise( ArgumentError ) { b = BookSearch.new(search: BasicObject.new) }
   end
 
 end
