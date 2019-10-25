@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'json'
 require 'optparse'
+require 'io/console'
 
 require_relative 'common/api_query'
 require_relative 'common/google_api_key'
@@ -73,9 +74,9 @@ rescue SearchError
   exit
 end
 
-print "Pick a book to add to your library (or 0 to quit): "
+print "Pick a book to add to your library (or any other key to quit): "
 
-selection = STDIN.gets.chomp.to_i
+selection = STDIN.getch.chomp.to_i
 i = selection - 1
 exit if i < 0 or i > 4
 
