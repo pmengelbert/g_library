@@ -24,8 +24,9 @@ class TestBookSearch < Test::Unit::TestCase
     assert_raise( ArgumentError ) { b = BookSearch.new }
   end
 
-  def test_wrong_parameters_should_result_in_error
+  def test_error_unless_at_least_one_correct_parameter_except_num
     assert_raise( ArgumentError) { b = BookSearch.new(asdf: "hello", qwer: "goodbye") }
+    assert_raise( ArgumentError) { b = BookSearch.new(asdf: "hello", num: 4) }
   end
 
 end
