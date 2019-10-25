@@ -46,7 +46,7 @@ class BookSearch
     def make_url_arg_list
       "&q=" + @q + @raw_args.map.with_index do |pair, i|
         pair[0] = ("in" + pair[0]) if %w[title author publisher].include?(pair[0])
-        (i == 0 ? "%s:%s" : "+%s:%s")  % [pair[0], pair[1]]
+        ((i == 0 && @q.empty?) ? "%s:%s" : "+%s:%s")  % [pair[0], pair[1]]
       end.join
     end
 

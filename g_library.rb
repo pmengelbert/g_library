@@ -36,7 +36,6 @@ OptionParser.new do |opts|
 
   opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
     l = UserLibrary.new(filename)
-    pp filename
     l.pretty_print
     exit
   end
@@ -51,13 +50,11 @@ OptionParser.new do |opts|
 
 end.parse!
 
-pp filename
-
 l = UserLibrary.new(filename)
 
 
 begin
-  s = BookSearch.new(search: ARGV.join(' '), title: o[:title], author: o[:author], publisher: o[:publisher])
+  s = BookSearch.new(search: ARGV.join('+'), title: o[:title], author: o[:author], publisher: o[:publisher])
   books = s.map { |info| UserBook.new(info) }
 
   puts ""
@@ -76,7 +73,7 @@ rescue SearchError
 end
 
 print "Pick a book to add to your library (or 0 to quit): "
-selection = gets.chomp.to_i
+selection = STDIN.gets.chomp.to_i
 i = selection - 1
 exit if i == -1
 l.add(UserBook.new(s[i]))

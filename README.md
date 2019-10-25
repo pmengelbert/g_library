@@ -58,7 +58,39 @@ ruby g_library.rb -p "signet" -a "dickens" great expectations
 In this situation, glibrary will query the Google Books database for books from the publisher "signet", by the author "dickens", and with the general keyword string "great expectations".
 
 #### Saving books to your reading list
-You will then be asked if you want to save one of the five results to your reading list.  Pick a number, and it will be saved.  You can view your reading list in List mode (see below)
+You will then be asked if you want to save one of the five results to your reading list:  
+```
+% ruby g_library.rb -p "signet" -a "dickens" great expectations
+
+-----Match #1-----
+Title: Great Expectations
+Author: Charles Dickens
+Publisher: Signet
+
+-----Match #2-----
+Title: Bleak House
+Author: Charles Dickens
+Publisher: Univ. Press of Mississippi
+
+-----Match #3-----
+Title: Oliver Twist, Or, the Parish Boy's Progress
+Author: Charles Dickens
+Publisher: Signet
+
+-----Match #4-----
+Title: The Pickwick Papers
+Author: Charles Dickens
+Publisher: Univ. Press of Mississippi
+
+-----Match #5-----
+Title: A Christmas Carol
+Author: Charles Dickens
+Publisher: 
+
+Pick a book to add to your library (or 0 to quit): 
+```
+
+Pick a number, and it will be saved.  You can view your reading list in List mode (see below)
 
 #### Using a different library file
 If you want to save to a library file other than the default, call glibrary with the -f (--lib-file=) flag:
