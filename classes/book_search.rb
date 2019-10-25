@@ -1,7 +1,7 @@
 require 'json'
 require_relative '../common/api_query'
 require_relative '../common/google_api_url'
-require_relative '../common/search_error'
+require_relative '../common/errors'
 
 class BookSearch
   include ApiQuery
@@ -10,32 +10,29 @@ class BookSearch
   attr_reader :selected_results, :full_results
 
   def initialize(args)
-    num_results = args.delete(:num) || 5
+    @args = args.dup
+    num_results = @args.delete(:num) || 5
 
     raise ArgumentError unless args.keys.any? do |k| 
       %i[title author publisher subject isbn lccn oclc].include?(k)
     end
 
-    @q = args.delete(:search)
-    args.keys.each do |k|
-      args.delete(k) if args[k].nil? || args[k].empty?
-    end
-
-    @raw_args = args.map { |k, v| [k.to_s, v.to_s] }.to_h
+    @args = args.reject { |k, v| v.nil? || v.empty? }.to_h
+    @args = @args.map { |k, v| [k,v].map(&:to_s) }.to_h
 
     url = make_url
+    pp url
 
     response = get_response(url)
+    raise SearchError unless response.code == "200"
+
     @full_results = JSON.parse(response.body)
 
     num = full_results['totalItems']
+    raise NoResults unless num > 0
 
-    if num && num > 0 && response.code == "200"
-      @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
-    else
+    @selected_results = full_results['items'].first(num_results).map { |res| format_hash res }
 
-      raise SearchError, "No results"
-    end
   end
 
   def each
@@ -53,14 +50,20 @@ class BookSearch
 
   private 
     def make_url_arg_list
-      q = @q.to_s
-      url = "?q="
-      url += @raw_args.map.with_index do |(k,v), i|
+      url = ["?q="]
 
+      q = @args.delete('search')
+      url << q.to_s
+
+      url << @args.map do |k,v|
         k = ("in" + k) if %w[title author publisher].include?(k)
+        "%s:%s" % [k, v] 
+      end
 
-        "%s%s:%s" % [i == 0 ? q : "+", k, v] 
-      end.join
+      url.reject!(&:empty?)
+
+      url[0] + url[1, url.length-1].join("+")
+
     end
 
     def format_hash(hash)
@@ -71,8 +74,8 @@ class BookSearch
       (BASE_API_URL + make_url_arg_list).gsub(/ /, "+")
     end
 
-    def raw_args
-      @raw_args
+    def args
+      @args
     end
 
 end

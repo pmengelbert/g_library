@@ -8,7 +8,7 @@ require_relative 'common/google_api_url'
 require_relative 'classes/book_search'
 require_relative 'classes/user_book'
 require_relative 'classes/user_library'
-require_relative 'common/search_error'
+require_relative 'common/errors'
 
 ARGV << '-h' if ARGV.empty?
 
@@ -69,6 +69,10 @@ begin
     puts ""
   end
 rescue SearchError 
+  puts "\nThere was an error with your query; be careful to format it well"
+  puts ""
+  exit
+rescue NoResults
   puts "\nNo results."
   puts ""
   exit
