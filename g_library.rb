@@ -70,11 +70,14 @@ begin
 rescue SearchError 
   puts "\nNo results."
   puts ""
+  exit
 end
 
 print "Pick a book to add to your library (or 0 to quit): "
+
 selection = STDIN.gets.chomp.to_i
 i = selection - 1
-exit if i == -1
+exit if i < 0 or i > 4
+
 l.add(UserBook.new(s[i]))
 l.save
