@@ -49,7 +49,7 @@ OptionParser.new do |opts|
     filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
     l = UserLibrary.new(filename)
     l.pretty_print
-#    exit
+    exit
   end
 
   opts.on("-h", "--help", "Prints this help") do
