@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'glibrary'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = '2019-10-26'
   s.summary     = "glibrary"
   s.description = "A simple Google Books API Query program"
