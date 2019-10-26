@@ -57,7 +57,7 @@ OptionParser.new do |opts|
 
 end.parse!
 
-filename.gsub!(/\// '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
 l = UserLibrary.new(filename)
 
 
