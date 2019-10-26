@@ -1,5 +1,6 @@
 require 'json'
 require_relative '../common/errors'
+require_relative 'user_book'
 
 class UserLibrary
   include Enumerable
@@ -11,12 +12,12 @@ class UserLibrary
     @books = []
 
     if sourcefile
-      @filename = File.absolute_path(sourcefile, valid_class = UserBook)
+      @filename = File.absolute_path(sourcefile)
 
       if File.exist?(filename)
         file = File.open(filename)
         book_array = JSON.parse(file.read)
-        @books = book_array.map { |d| valid_class.new(d) }
+        @books = book_array.map { |d| UserBook.new(d) }
       end
     else
       @filename = File.absolute_path("saved_libraries/library.json")

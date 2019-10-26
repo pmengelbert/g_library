@@ -1,6 +1,12 @@
 require 'json'
 
-class UserBook
+class Hash
+  def info
+    self
+  end
+end
+
+class UserBook < Hash
 
   attr_accessor :title, :publisher, :info, :id
 
