@@ -41,6 +41,7 @@ OptionParser.new do |opts|
   end
 
   opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
+    filename.gsub!(/\// '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
     l = UserLibrary.new(filename)
     l.pretty_print
     exit
@@ -56,6 +57,7 @@ OptionParser.new do |opts|
 
 end.parse!
 
+filename.gsub!(/\// '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
 l = UserLibrary.new(filename)
 
 
