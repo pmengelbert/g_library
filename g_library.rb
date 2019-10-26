@@ -13,6 +13,7 @@ require_relative 'common/errors'
 ARGV << '-h' if ARGV.empty?
 
 filename = File.dirname(File.expand_path(__FILE__)) + "/saved_libraries/library.json"
+puts filename
 
 o = {}
 
@@ -33,6 +34,8 @@ OptionParser.new do |opts|
 
   opts.on("-f", "--lib-file=LIBFILE", "Select a library save file") do |libfile|
     if File.exist(File.absolute_path(libfile))
+      filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+      puts filename
       filename = libfile
     else
       puts "Library file not found"
@@ -41,7 +44,8 @@ OptionParser.new do |opts|
   end
 
   opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
-    filename.gsub!(/\// '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+    filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+    puts filename
     l = UserLibrary.new(filename)
     l.pretty_print
     exit
@@ -57,7 +61,8 @@ OptionParser.new do |opts|
 
 end.parse!
 
-filename.gsub!(/\// '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+puts filename
 l = UserLibrary.new(filename)
 
 
@@ -90,7 +95,8 @@ print "Enter a number (1-5) to add a book to your reading list:\n(or any other k
 selection = STDIN.getch.chomp.to_i
 i = selection - 1
 puts ""
-exit if i < 0 or i > 4 or !i.is_a?(String)
+exit if i < 0 or i > 4
 
 l.add(UserBook.new(s[i]))
+puts filename
 l.save
