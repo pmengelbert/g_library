@@ -19,7 +19,7 @@ class UserBook
     #The most commonly attributes, for ease of use
     @id = info['id'] || ""
     @title = info['title'] || ""
-    @authors = info['authors'] || "" 
+    @authors = info['authors'] || [] 
     @publisher = info['publisher'] || ""
   end
 
