@@ -106,7 +106,7 @@ begin
   exit if i < 0 or i > 4
 
   #add a book to the user's library
-  l.add(books[i])
+  l << books[i]
   l.save
 
 rescue SearchError 
