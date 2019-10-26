@@ -23,16 +23,16 @@ or
 ### Windows
 Visit [rubyinstaller.org](https://rubyinstaller.org/) for a standalone installer.
 
-## Installing
+# Installing
 
-### As a gem
+## As a gem
 glibrary will work best when installed as a gem.  At the command-line, type the following:
 ```
 % gem install glibrary
 ```
 You may need administrator privileges to install gems.  Usually you won't, but in testing on Windows I found that administrator privileges were necessary.
 
-### Cloning the repo
+## Cloning the repo
 ```
 % git clone https://github.com/pmengelbert/g_library.git
 ```
