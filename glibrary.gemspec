@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name        = 'glibrary'
-  s.version     = '0.0.1'
+  s.version     = '0.0.2'
   s.date        = '2019-10-26'
-  s.summary     = "Glibrary"
+  s.summary     = "glibrary"
   s.description = "A simple Google Books API Query program"
   s.authors     = ["Peter Engelbert"]
   s.email       = 'pmengelbert@gmail.com'
