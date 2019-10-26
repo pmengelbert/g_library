@@ -116,6 +116,32 @@ If you want to save to a library file other than the default, call glibrary with
 
 ### List mode
 Whenever the "-l" flag is used, glibrary enters List mode, and will not search.  List mode shows your saved 'reading list', which is populated in search mode.
+```
+------SYiAAAAQBAJ-----
+Title: The Logic Book
+Author: Merrie Bergmann, James Moor, Jack Nelson
+Publisher: McGraw-Hill Higher Education
+
+-----1g8ENH5ox8oC-----
+Title: The Issue at Hand
+Author: Gil Fronsdal
+Publisher: Insight Meditation Center
+
+-----OfgVAAAAQBAJ-----
+Title: A Practical Approach to 18th Century Counterpoint
+Author: Robert Gauldin
+Publisher: Waveland Press
+
+-----UPAYAAAAYAAJ-----
+Title: Treasure Island
+Author: Robert Louis Stevenson
+Publisher: 
+
+-----1CNujxYPEpUC-----
+Title: Home
+Author: Toni Morrison
+Publisher: Vintage
+```
 
 #### Using a different library file
 If you want to display a library file other than the default, call glibrary with the -f (--lib-file=) flag.
