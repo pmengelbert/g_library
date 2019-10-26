@@ -32,13 +32,13 @@ git clone https://github.com/pmengelbert/g_library.git
 
 glibrary comes with two main 'modes': Search mode and List mode.  For more information, run the following:
 ```
-ruby g_library.rb
+glibrary
 ```
 
 You will see output like this:
 
 ```
-Usage: ruby g_library.rb [options...] [query]
+Usage: glibrary [options...] [query]
     -t, --title=TITLE                Specify a title keyword
     -a, --author=AUTHOR              Specify an author keyword
     -p, --publisher=PUBLISHER        Specify a publisher keyword
@@ -55,7 +55,7 @@ Usage: ruby g_library.rb [options...] [query]
 Search mode uses 0-3 flags, "-t", "-a", "-p", indicating title search, author search, and publisher search, respectively.
 Any other arguments will be interpreted as a single general-purpose search string.  Take the following, for example:
 ```
-ruby g_library.rb -p "signet" -a "dickens" great expectations
+glibrary -p "signet" -a "dickens" great expectations
 ```
 
 In this situation, glibrary will query the Google Books database for books from the publisher "signet", by the author "dickens", and with the general keyword string "great expectations".
@@ -63,7 +63,7 @@ In this situation, glibrary will query the Google Books database for books from 
 #### Saving books to your reading list
 You will then be asked if you want to save one of the five results to your reading list:  
 ```
-% ruby g_library.rb -p "signet" -a "dickens" great expectations
+% glibrary -p "signet" -a "dickens" great expectations
 
 -----Match #1-----
 Title: Great Expectations
@@ -98,7 +98,7 @@ Pick a number, and it will be saved.  You can view your reading list in List mod
 #### Using a different library file
 If you want to save to a library file other than the default, call glibrary with the -f (--lib-file=) flag:
 ```
-ruby g_library.rb -p "signet" -a "dickens" -f /tmp/library.json
+glibrary -p "signet" -a "dickens" -f /tmp/library.json
 ```
 
 ### List mode
@@ -107,7 +107,7 @@ Whenever the "-l" flag is used, glibrary enters List mode, and will not search. 
 #### Using a different library file
 If you want to display a library file other than the default, call glibrary with the -f (--lib-file=) flag.
 ```
-ruby g_library.rb -l -f /tmp/library.json
+glibrary -l -f /tmp/library.json
 ```
 
 ## Running the tests
