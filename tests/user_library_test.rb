@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../g_library.rb'
+require_relative '../classes/user_library.rb'
 
 class UserLibraryTest < Test::Unit::TestCase
 

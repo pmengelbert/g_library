@@ -13,17 +13,9 @@ class UserBook
     @publisher = info['publisher'] || ""
   end
 
-  def to_json
-    JSON.pretty_generate(info)
-  end
-
   def [](key)
     return authors if key =~ /authors?/i
     info[key]
-  end
-
-  def[]=(key, value)
-    @info[key] = value
   end
 
   def authors
@@ -32,10 +24,6 @@ class UserBook
 
   def author
     authors
-  end
-
-  def author=(str)
-    @authors << str
   end
 
 end

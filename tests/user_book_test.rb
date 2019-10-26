@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../g_library.rb'
+require_relative '../classes/user_book'
 
 class UserBookTest < Test::Unit::TestCase
 
@@ -14,8 +14,9 @@ class UserBookTest < Test::Unit::TestCase
     end
   end
 
-  def test_authors_attr_should_be_array
-    assert_instance_of Array, @b.authors 
+  def test_authors_attr_should_be_string
+    assert_instance_of String, @b.authors 
+    assert_instance_of String, @b.author
   end
 
   def test_for_valid_arguments

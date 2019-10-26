@@ -32,7 +32,12 @@ OptionParser.new do |opts|
   end
 
   opts.on("-f", "--lib-file=LIBFILE", "Select a library save file") do |libfile|
-    filename = libfile
+    if File.exist(File.absolute_path(libfile))
+      filename = libfile
+    else
+      puts "Library file not found"
+      exit
+    end
   end
 
   opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
@@ -78,7 +83,7 @@ rescue NoResults
   exit
 end
 
-print "Pick a book to add to your reading list (or any other key to quit): "
+print "Enter a number (1-5) to add a book to your reading list:\n(or any other key to quit)\n"
 
 selection = STDIN.getch.chomp.to_i
 i = selection - 1

@@ -1,4 +1,5 @@
 require 'json'
+require_relative '../common/errors'
 
 class UserLibrary
   include Enumerable
@@ -14,7 +15,8 @@ class UserLibrary
 
       if File.exist?(filename)
         file = File.open(filename)
-        @books = JSON.parse(file.read).map { |d| UserBook.new(d) }
+        book_array = JSON.parse(file.read)
+        @books = book_array.map { |d| UserBook.new(d) }
       end
     else
       @filename = File.absolute_path("saved_libraries/library.json")
@@ -24,15 +26,8 @@ class UserLibrary
   end
 
   def add(book)
-    unless valid?(book)
-      raise "Invalid Data" 
-      return
-    end
+    (raise DataError "Invalid Data"; return) unless valid?(book)
     @books << book
-  end
-
-  def books=(book)
-    add(book)
   end
 
   def save
@@ -52,8 +47,6 @@ class UserLibrary
   end
 
   def pretty_print
-    puts ""
-    puts ""
     puts ""
     each do |b|
       puts "-"*5 + b['id'] + "-" * 5
