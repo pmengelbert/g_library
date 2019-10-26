@@ -11,12 +11,12 @@ class UserLibrary
     @books = []
 
     if sourcefile
-      @filename = File.absolute_path(sourcefile)
+      @filename = File.absolute_path(sourcefile, valid_class = UserBook)
 
       if File.exist?(filename)
         file = File.open(filename)
         book_array = JSON.parse(file.read)
-        @books = book_array.map { |d| UserBook.new(d) }
+        @books = book_array.map { |d| valid_class.new(d) }
       end
     else
       @filename = File.absolute_path("saved_libraries/library.json")
@@ -62,7 +62,7 @@ class UserLibrary
 
   private
     def valid?(b)
-      b.is_a?(UserBook) && b.respond_to?(:info)
+      b.respond_to?(:info)
     end
 
     def set_filename(name)
