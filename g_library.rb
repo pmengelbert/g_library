@@ -11,6 +11,9 @@ require_relative 'classes/user_library'
 require_relative 'common/errors'
 
 ARGV << '-h' if ARGV.empty?
+if ARGV.include?("-l")
+  ARGV << ARGV.delete("-l")
+end
 
 filename = File.dirname(File.expand_path(__FILE__)) + "/saved_libraries/library.json"
 
@@ -18,6 +21,7 @@ o = {}
 
 OptionParser.new do |opts|
   opts.banner = "Usage: ruby g_library.rb [options...] [query]"
+  library = opts.default_argv.include?("-l")
 
   opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
     o[:title] = t
@@ -32,16 +36,14 @@ OptionParser.new do |opts|
   end
 
   opts.on("-f", "--lib-file=LIBFILE", "Select a library save file") do |libfile|
-    if File.exist(File.absolute_path(libfile))
-      filename = libfile
-    else
-      puts "Library file not found"
-      exit
+    filename = File.absolute_path(libfile)
+    unless File.exist?(filename)
+      (puts "Library file not found, cannot display."; exit) if library
+      puts "Creating new file"
     end
   end
 
   opts.on("-l", "--library", "See your library; ignores all search options\n\t\t\t\t\tdefault library file is [repository_root]/saved_libraries/library.json") do
-    filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
     l = UserLibrary.new(filename)
     l.pretty_print
     exit
@@ -57,7 +59,7 @@ OptionParser.new do |opts|
 
 end.parse!
 
-filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+
 l = UserLibrary.new(filename)
 
 
@@ -90,7 +92,7 @@ print "Enter a number (1-5) to add a book to your reading list:\n(or any other k
 selection = STDIN.getch.chomp.to_i
 i = selection - 1
 puts ""
-exit if i < 0 or i > 4 or !i.is_a?(String)
+exit if i < 0 or i > 4
 
 l.add(UserBook.new(s[i]))
 l.save

@@ -53,9 +53,7 @@ class UserLibrary
       puts "-"*5 + b['id'] + "-" * 5
       %w[title author publisher].each do |ind|
         puts "%s: %s" % [ind.capitalize, b[ind]]
-        puts ""
       end
-    puts ""
     puts ""
     end
     puts ""
