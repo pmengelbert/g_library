@@ -52,18 +52,15 @@ glibrary comes with two main 'modes': Search mode and List mode.  For more infor
 ```
 
 You will see output like this:
-
 ```
-Usage: glibrary [options...] [query]
+Usage: ruby g_library.rb [options...] [query]
     -t, --title=TITLE                Specify a title keyword
     -a, --author=AUTHOR              Specify an author keyword
     -p, --publisher=PUBLISHER        Specify a publisher keyword
-    -f, --lib-file=LIBFILE           Select a library save file
+    -f, --lib-file=LIBFILE           Select a library save file. Otherwise, a default save file will be used.
     -l, --library                    See your library; ignores all search options
-					default library file is [repository_root]/saved_libraries/library.json
     -h, --help                       Prints this help
 [query]: all other arguments will be treated as general search keywords
-
 ```
 
 ### Search mode
