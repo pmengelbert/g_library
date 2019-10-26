@@ -6,7 +6,7 @@ class Hash
   end
 end
 
-class UserBook < Hash
+class UserBook
 
   attr_accessor :title, :publisher, :info, :id
 
