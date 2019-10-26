@@ -11,12 +11,12 @@ class BookSearch
 
   def initialize(args)
     @args = args.dup
-    #
+    
     #the number of results to show:
     num_results = @args.delete(:num) || 5
 
     #make sure at least one argument is searchable
-    raise ArgumentError unless args.keys.any? do |k| 
+    raise ArgumentError unless @args.keys.any? do |k| 
       %i[search title author publisher subject isbn lccn oclc].include?(k)
     end
 

@@ -36,10 +36,6 @@ class TestBookSearch < Test::Unit::TestCase
     assert_equal x.send(:args)['title'], y.send(:args)['title']
   end
 
-  def test_error_should_be_raised_if_an_argument_cant_be_recast_as_string
-    assert_raise( ArgumentError ) { b = BookSearch.new(search: BasicObject.new) }
-  end
-
   def test_url_generation
     x = BookSearch.new(search: "michelle", author: "obama", title: "becoming")
     y = BookSearch.new(author: "obama", title: "becoming")
