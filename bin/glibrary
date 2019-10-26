@@ -3,12 +3,12 @@ require 'json'
 require 'optparse'
 require 'io/console'
 
-require_relative 'common/api_query'
-require_relative 'common/google_api_url'
-require_relative 'classes/book_search'
-require_relative 'classes/user_book'
-require_relative 'classes/user_library'
-require_relative 'common/errors'
+require_relative '../common/api_query'
+require_relative '../common/google_api_url'
+require_relative '../classes/book_search'
+require_relative '../classes/user_book'
+require_relative '../classes/user_library'
+require_relative '../common/errors'
 
 ARGV << '-h' if ARGV.empty?
 
@@ -16,7 +16,7 @@ ARGV << '-h' if ARGV.empty?
 ARGV << ARGV.delete("-l") if ARGV.include?("-l")
 
 #default filename for saved reading list
-filename = File.dirname(File.expand_path(__FILE__)) + "/saved_libraries/library.json"
+filename = File.join(File.dirname(__FILE__), "../saved_libraries/library.json")
 
 #initialize the hash which will hold the search parameters
 o = {}
