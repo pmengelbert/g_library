@@ -70,7 +70,7 @@ OptionParser.new do |opts|
 end.parse!
 
 #substitute \ for / if the machine is running windows
-filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /C:\\Windows/i }
+filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
 
 # Create or load the library, depending on whether or not the file already exists.
 l = UserLibrary.new(filename)
