@@ -29,6 +29,7 @@ class BookSearch
     #get a nicely formatted url; very important
     @url = make_url
 
+    raise NoInternetError unless connected_to_internet?
     #check for successful response from the API
     response = get_response(url)
     raise SearchError unless response.code == "200"

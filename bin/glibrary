@@ -108,6 +108,9 @@ begin
   l << books[i]
   l.save
 
+rescue NoInternetError
+  puts "\nNo internet connection.  Please connect to the internet and try again."
+  puts ""
 rescue SearchError 
   puts "\nThere was an error with your query; be careful to format it well"
   puts ""
