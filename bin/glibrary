@@ -3,20 +3,22 @@ require 'json'
 require 'io/console'
 
 require_relative '../common/api_query'
+require_relative '../common/command_line_parse'
+require_relative '../common/errors'
+require_relative '../common/exec_helper'
 require_relative '../common/google_api_url'
+require_relative '../common/search_error'
 require_relative '../classes/book_search'
 require_relative '../classes/user_book'
 require_relative '../classes/user_library'
-require_relative '../common/errors'
-require_relative '../common/exec_helper.rb'
-require_relative '../common/command_line_parse.rb'
 
+CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  "../saved_libraries/library.json"
 
 process_args!
 
 options = {}
-filename = File.join(File.dirname(__FILE__), DEFAULT_FILENAME)
+filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
 filename = command_line_parse!(filename, options)
 
 prepare_filename_for_os!(filename)
