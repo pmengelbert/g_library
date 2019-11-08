@@ -32,13 +32,6 @@ functions, we can avoid using comments altogether to explain what the code is do
 I would encourage you to remove your comments while thinking: 'without this comment,
   would the code make sense to anyone other than myself?'
 
--> In ApiQuery, you have methods which are unused - get_response_hash is not called by
-any other class, and get_response_code is used within your TestBookSearch class. We
-can keep our repos clean of any "cruft" by removing code the minute we don't need it
-anymore.
-
-
-
 General Question:
 -----------------
 
