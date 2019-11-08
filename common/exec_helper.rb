@@ -1,13 +1,13 @@
-def process_args!(args)
-  args << '-h' if args.empty?
-  args << args.delete("-l") if args.include?("-l")
+def process_args!
+  ARGV << '-h' if ARGV.empty?
+  ARGV << ARGV.delete("-l") if ARGV.include?("-l")
 end
 
 def prepare_filename_for_os!(filename)
   filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
 end
 
-def command_line_parse!(argv, filename, o)
+def command_line_parse!(filename, o)
 
   OptionParser.new do |opts|
     opts.banner = "Usage: ruby g_library.rb [options...] [query]"
