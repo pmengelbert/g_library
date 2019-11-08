@@ -43,11 +43,6 @@ class BookSearch
     selected_results[index]
   end
 
-  def to_json
-    JSON.pretty_generate(selected_results)
-  end
-
-
   private 
   class << self
     def make_url_arg_list(args)

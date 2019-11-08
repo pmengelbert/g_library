@@ -37,13 +37,6 @@ any other class, and get_response_code is used within your TestBookSearch class.
 can keep our repos clean of any "cruft" by removing code the minute we don't need it
 anymore.
 
--> Additionally, it looks like TestBookSearch is not exactly unit testing the
-BookSearch class - it seems you’re testing how BookSearch object reacts to different
-messages once it’s been initialized. I would recommend breaking out the initialize
-function into smaller pieces and instead, unit testing those. Having all functions
-covered under unit test will help you realize what you need and don't need, thereby
-removing cruft and having confidence that your code is performing the way you expect
-it to perform.
 
 
 General Question:
