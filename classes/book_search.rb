@@ -14,7 +14,7 @@ class BookSearch
 
     num_results = @args.delete(:num) || 5
 
-    raise ArgumentError unless args[:test] || BookSearch.searchable_arguments?(args)
+    raise ArgumentError unless BookSearch.searchable_arguments?(@args)
 
     @args = BookSearch.format_args(@args)
     @url = BookSearch.make_url(@args)
