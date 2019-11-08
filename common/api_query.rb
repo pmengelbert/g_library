@@ -20,12 +20,12 @@ module ApiQuery
       get_response(url).body
     end
 
-    def connected_to_internet?
+    def connected_to_internet?(address = "google.com")
       dns_resolver = Resolv::DNS.new()
       begin
-        dns_resolver.getaddress("symbolics.com")#the first domain name ever. Will probably not be removed ever.
+        dns_resolver.getaddress(address)
         return true
-      rescue Resolv::ResolvError => e
+      rescue Resolv::ResolvError
         return false
       end
     end

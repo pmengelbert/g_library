@@ -18,6 +18,12 @@ class TestBookSearch < Test::Unit::TestCase
     assert result.all? { |k, v| k.is_a?(String) && v.is_a?(String) }
   end
 
+  def test_connected_to_internet?
+    assert !@s.send(:connected_to_internet?, "jidooifj.iuhewi")
+    #assumes we are connected to the internet
+    assert @s.send(:connected_to_internet?)
+  end
+
   def test_url_making_function_with_proper_input
     assert_equal @s.url,
       "https://www.googleapis.com/books/v1/volumes?q=harry+intitle:harry+potter+inauthor:rowling"
