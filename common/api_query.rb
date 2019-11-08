@@ -5,7 +5,7 @@ module ApiQuery
 
   private
     def get_response(url)
-      @response ||= Net::HTTP.get_response(URI.parse(url))
+        Net::HTTP.get_response(URI.parse(url))
     end
 
     def get_response_hash(url)

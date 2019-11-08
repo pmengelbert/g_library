@@ -16,9 +16,7 @@ class BookSearch
     num_results = @args.delete(:num) || 5
 
     #make sure at least one argument is searchable
-    raise ArgumentError unless @args.keys.any? do |k| 
-      %i[search title author publisher subject isbn lccn oclc].include?(k)
-    end
+    raise ArgumentError unless searchable_arguments?
 
     #map the keys and values to strings for ease of manipulation
     @args = @args.map { |k, v| [k,v].map(&:to_s) }.to_h
@@ -80,6 +78,12 @@ class BookSearch
 
       url.reject!(&:empty?)
       url[0] + url[1, url.length-1].join("+")
+    end
+
+    def searchable_arguments?(args = @args)
+      args.keys.any? do |k| 
+        %i[search title author publisher subject isbn lccn oclc].include?(k)
+      end
     end
 
 

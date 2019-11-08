@@ -7,6 +7,11 @@ class TestBookSearch < Test::Unit::TestCase
     @s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
   end
 
+  def test_searchable_arguments_function
+    assert !@s.send(:searchable_arguments?, 
+                    { titel: "The Classical Style", auhtor: "Rosen" })
+  end
+
   def test_url_making_function_with_proper_input
     assert_equal @s.url,
       "https://www.googleapis.com/books/v1/volumes?q=harry+intitle:harry+potter+inauthor:rowling"
