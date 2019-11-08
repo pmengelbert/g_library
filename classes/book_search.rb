@@ -11,21 +11,16 @@ class BookSearch
 
   def initialize(args)
     @args = args.dup
-    #the number of results to show:
 
     num_results = @args.delete(:num) || 5
 
-    #make sure at least one argument is searchable
     raise ArgumentError unless searchable_arguments?
 
     @args = format_args
-    #get a nicely formatted url; very important
     @url = make_url
 
     raise NoInternetError unless connected_to_internet?
-    #check for successful response from the API
 
-    #Puts the results into a hash
     response = get_response(@url)
     raise SearchError unless correct_response_code?(response.code)
 
@@ -34,10 +29,7 @@ class BookSearch
     num = full_results['totalItems']
     raise NoResults unless num > 0
 
-    #the selected results:
     @selected_results = full_results['items'].first(num_results)
-    #The following mapping gets the 'volumeInfo' property from the results,
-    #and adds the 'id' property.
     @selected_results.map! { |res| format_hash res }
 
   end
