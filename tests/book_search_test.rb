@@ -12,6 +12,12 @@ class TestBookSearch < Test::Unit::TestCase
                     { titel: "The Classical Style", auhtor: "Rosen" })
   end
 
+  def test_format_args
+    result = @s.send(:format_args,
+              { title: "The Classical Style", author: "Rosen" } )
+    assert result.all? { |k, v| k.is_a?(String) && v.is_a?(String) }
+  end
+
   def test_url_making_function_with_proper_input
     assert_equal @s.url,
       "https://www.googleapis.com/books/v1/volumes?q=harry+intitle:harry+potter+inauthor:rowling"
