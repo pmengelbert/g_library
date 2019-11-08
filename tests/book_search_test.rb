@@ -8,12 +8,12 @@ class TestBookSearch < Test::Unit::TestCase
   end
 
   def test_searchable_arguments_function
-    assert !@s.send(:searchable_arguments?, 
+    assert !BookSearch.send(:searchable_arguments?, 
                     { titel: "The Classical Style", auhtor: "Rosen" })
   end
 
   def test_format_args
-    result = @s.send(:format_args,
+    result = BookSearch.send(:format_args,
               { title: "The Classical Style", author: "Rosen" } )
     assert result.all? { |k, v| k.is_a?(String) && v.is_a?(String) }
   end
@@ -47,17 +47,13 @@ class TestBookSearch < Test::Unit::TestCase
     assert_raise( ArgumentError) { b = BookSearch.new(asdf: "hello", num: 4) }
   end
 
-  def test_arguments_should_automatically_be_recast_as_strings
-    x = BookSearch.new(title: 1984)
-    y = BookSearch.new(title: "1984")
-    assert_equal x.send(:args)['title'], y.send(:args)['title']
-  end
-
   def test_url_generation
-    x = BookSearch.new(search: "michelle", author: "obama", title: "becoming")
-    y = BookSearch.new(author: "obama", title: "becoming")
-    assert_equal x.url, "https://www.googleapis.com/books/v1/volumes?q=michelle+inauthor:obama+intitle:becoming"
-    assert_equal y.url, "https://www.googleapis.com/books/v1/volumes?q=inauthor:obama+intitle:becoming"
+    x = BookSearch.format_args(search: "michelle", author: "obama", title: "becoming")
+    url1 = BookSearch.make_url(x)
+    y = BookSearch.format_args(author: "obama", title: "becoming")
+    url2 = BookSearch.make_url(y)
+    assert_equal url1, "https://www.googleapis.com/books/v1/volumes?q=michelle+inauthor:obama+intitle:becoming"
+    assert_equal url2, "https://www.googleapis.com/books/v1/volumes?q=inauthor:obama+intitle:becoming"
   end
 
 end

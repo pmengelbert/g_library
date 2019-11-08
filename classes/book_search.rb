@@ -14,10 +14,10 @@ class BookSearch
 
     num_results = @args.delete(:num) || 5
 
-    raise ArgumentError unless searchable_arguments?
+    raise ArgumentError unless args[:test] || BookSearch.searchable_arguments?(args)
 
-    @args = format_args
-    @url = make_url
+    @args = BookSearch.format_args(@args)
+    @url = BookSearch.make_url(@args)
 
     raise NoInternetError unless connected_to_internet?
 
@@ -30,7 +30,7 @@ class BookSearch
     raise NoResults unless num > 0
 
     @selected_results = full_results['items'].first(num_results)
-    @selected_results.map! { |res| format_hash res }
+    @selected_results.map! { |res| BookSearch.format_hash res }
 
   end
 
@@ -51,15 +51,16 @@ class BookSearch
     JSON.pretty_generate(selected_results)
   end
 
-  private 
 
-    def make_url_arg_list
+  private 
+  class << self
+    def make_url_arg_list(args)
       url = ["?q="]
 
-      q = @args.delete('search')
+      q = args.delete('search')
       url << q.to_s
 
-      url << @args.map do |k,v|
+      url << args.map do |k,v|
         k = ("in" + k) if %w[title author publisher].include?(k)
         "%s:%s" % [k, v] 
       end
@@ -68,13 +69,13 @@ class BookSearch
       url[0] + url[1, url.length-1].join("+")
     end
 
-    def format_args(args = @args)
+    def format_args(args)
       result = args.map { |k, v| [k,v].map(&:to_s) }.to_h
       result.reject { |k, v| v.empty? }
       return result.to_h
     end
 
-    def searchable_arguments?(args = @args)
+    def searchable_arguments?(args)
       args.keys.any? do |k| 
         %i[search title author publisher subject isbn lccn oclc].include?(k)
       end
@@ -88,13 +89,14 @@ class BookSearch
 
     #Add the base url and the formatted arg list together, and make sure
     #there are no spaces
-    def make_url
-      (BASE_API_URL + make_url_arg_list).gsub(/ /, "+")
+    def make_url(args)
+      (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
     end
 
     #for testing purposes only
     def args
       @args
     end
+  end
 
 end
