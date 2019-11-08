@@ -18,11 +18,7 @@ class BookSearch
     #make sure at least one argument is searchable
     raise ArgumentError unless searchable_arguments?
 
-    #map the keys and values to strings for ease of manipulation
-    @args = @args.map { |k, v| [k,v].map(&:to_s) }.to_h
-    #remove any empty values (nil values were converted to 
-    #empty strings by the last operation)
-    @args = @args.reject { |k, v| v.empty? }.to_h
+    @args = format_args
 
     #get a nicely formatted url; very important
     @url = make_url
@@ -78,6 +74,12 @@ class BookSearch
 
       url.reject!(&:empty?)
       url[0] + url[1, url.length-1].join("+")
+    end
+
+    def format_args(args = @args)
+      result = args.map { |k, v| [k,v].map(&:to_s) }.to_h
+      result.reject { |k, v| v.empty? }
+      return result.to_h
     end
 
     def searchable_arguments?(args = @args)
