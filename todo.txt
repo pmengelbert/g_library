@@ -1,0 +1,65 @@
+Hi Peter,
+
+Thank you for completing this project. We appreciate the time you put into your work!
+
+I reviewed your Technical Assessment, and have the following feedback to share with you:
+
+UI / General feedback:
+----------------------
+-> It would be nice to have the UI list prompt display something to the user after the
+user chooses a book to add. The messaging is the same whether the user chooses a book
+or quits the program, so something that affirms the user’s choice would be helpful.
+
+-> There's a mismatch between the name of the test directory (tests) and the README
+directions (test) If I add a book more than one time to my list, it shows up twice.
+It would be great to have a way to either tell the user that the book already exists
+in the list, or to remove duplicates!
+
+Code:
+-----
+
+-> The Glibrary file is doing a lot - parsing the command line, handling the search
+logic, and formatting the display. Splitting up these responsibilities will make the
+file easier to read and also will help the next person understand what each “module”
+is doing. Check out the Single Responsibility Principle here for more info!
+
+-> If you take a sweep of other classes, you will find similar responsibilities that you
+can group into their own modules! For example, the printing logic inside of the
+user_library class.
+
+-> Lots of comments - with the help of expressive naming and easy-to-follow small
+functions, we can avoid using comments altogether to explain what the code is doing.
+I would encourage you to remove your comments while thinking: 'without this comment,
+  would the code make sense to anyone other than myself?'
+
+-> In ApiQuery, you have methods which are unused - get_response_hash is not called by
+any other class, and get_response_code is used within your TestBookSearch class. We
+can keep our repos clean of any "cruft" by removing code the minute we don't need it
+anymore.
+
+-> Additionally, it looks like TestBookSearch is not exactly unit testing the
+BookSearch class - it seems you’re testing how BookSearch object reacts to different
+messages once it’s been initialized. I would recommend breaking out the initialize
+function into smaller pieces and instead, unit testing those. Having all functions
+covered under unit test will help you realize what you need and don't need, thereby
+removing cruft and having confidence that your code is performing the way you expect
+it to perform.
+
+
+General Question:
+-----------------
+
+-> Now that you've written a console application, think about how your application would
+need to change if you wanted it to be served as a mobile app, or a web app. How
+difficult would it be to repurpose your current implementation to satisfy a different
+one?
+
+-> Please consider my notes and take the opportunity to refactor your code to complete
+this step in your interview process. This second and final submission is due in 4 business
+days. 
+
+-> Please let me know if you have any questions and when you're done refactoring. 
+
+Thanks,
+Sylwia
+8th Light
