@@ -19,8 +19,6 @@ options = {}
 filename = File.join(File.dirname(__FILE__), DEFAULT_FILENAME)
 filename = command_line_parse!(filename, options)
 
-
-filename = command_line_parse!(filename, o)
 prepare_filename_for_os!(filename)
 
 l = UserLibrary.new(filename)
@@ -30,26 +28,9 @@ begin
 
   books = s.map { |info| UserBook.new(info) }
 
-  #print the resuls
-  puts ""
-  books.each_with_index do |b, i|
-    keys = %w[title author publisher]
-    n = i+1
-    puts "-"*5 + "Match ##{n}" + "-"*5 
-    keys.each do |k|
-      puts "%s: %s" % [k.capitalize, b[k]]
-    end
-    puts ""
-  end
+  print_book_results(books)
+  i = get_book_number
 
-  print "Enter a number (1-5) to add a book to your reading list:\n(or any other key to quit)\n"
-
-  selection = STDIN.getch.chomp.to_i
-  i = selection - 1
-  puts ""
-  exit if i < 0 or i > 4
-
-  #add a book to the user's library
   l << books[i]
   l.save
 rescue NoInternetError
