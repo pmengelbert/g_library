@@ -9,4 +9,12 @@ class TestExecHelper < Test::Unit::TestCase
     assert args[-1] == "-l"
   end
 
+  def test_method_prepare_filename_for_os!
+    s = "/home/pme/"
+    ENV["test"] = "C:\\Windows"
+    prepare_filename_for_os!(s)
+    ENV.delete("test")
+    assert s=~ /\\/
+  end
+
 end

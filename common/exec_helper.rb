@@ -1,6 +1,6 @@
-def process_args!
-  ARGV << '-h' if ARGV.empty?
-  ARGV << ARGV.delete("-l") if ARGV.include?("-l")
+def process_args!(args = ARGV)
+  args << '-h' if args.empty?
+  args << args.delete("-l") if args.include?("-l")
 end
 
 def prepare_filename_for_os!(filename)
