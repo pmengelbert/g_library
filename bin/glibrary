@@ -12,23 +12,20 @@ require_relative '../common/errors'
 require_relative '../common/exec_helper.rb'
 require_relative '../common/command_line_parse.rb'
 
+DEFAULT_FILENAME =  "../saved_libraries/library.json"
+
 process_args!
 
 #default
-filename = File.join(File.dirname(__FILE__), "../saved_libraries/library.json")
+filename = File.join(File.dirname(__FILE__), DEFAULT_FILENAME)
 
 o = {}
 
 filename = command_line_parse!(filename, o)
+prepare_filename_for_os!(filename)
 
-#substitute \ for / if the machine is running windows
-filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
-
-# Create or load the library, depending on whether or not the file already exists.
 l = UserLibrary.new(filename)
 
-#initialize the 
-#perform the search, and display the results.
 begin
   s = BookSearch.new(search: ARGV.join('+'), title: o[:title], author: o[:author], publisher: o[:publisher])
 

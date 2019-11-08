@@ -1,3 +1,20 @@
+def handle_nonexistent_file(filename, library)
+  (puts "Library file not found, cannot display."; exit) if library
+  puts "Creating new file"
+end
+
+def initialize_and_print_library(filename)
+  l = UserLibrary.new(filename)
+  l.pretty_print
+end
+
+def print_help_message(opts)
+  puts ""
+  puts opts
+  puts "[query]: all other arguments will be treated as general search keywords"
+  puts ""
+end
+
 def command_line_parse!(filename, o)
 
   OptionParser.new do |opts|
@@ -16,26 +33,21 @@ def command_line_parse!(filename, o)
       o[:publisher] = p
     end
 
-    opts.on("-f", "--lib-file=LIBFILE", "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
+    opts.on("-f", "--lib-file=LIBFILE",
+            "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
+
       filename = File.absolute_path(libfile)
-      unless File.exist?(filename)
-        (puts "Library file not found, cannot display."; exit) if library
-        puts "Creating new file"
-      end
+      handle_nonexistent_file(filename) unless File.exist?(filename, library)
     end
 
     opts.on("-l", "--library", "See your library; ignores all search options") do
       prepare_filename_for_os!(filename)
-      l = UserLibrary.new(filename)
-      l.pretty_print
+      initialize_and_print_library(filename)
       exit
     end
 
     opts.on("-h", "--help", "Prints this help") do
-      puts ""
-      puts opts
-      puts "[query]: all other arguments will be treated as general search keywords"
-      puts ""
+      print_help_message(opts)
       exit
     end
 
