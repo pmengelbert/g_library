@@ -24,18 +24,18 @@ class TestBookSearch < Test::Unit::TestCase
     assert @s.send(:connected_to_internet?)
   end
 
+  def test_correct_response_code?
+    url1 = "https://www.googleapis.com/books/v1/volumes?q=&intitle=harry"
+    url2 = @s.url
+    r1 = Net::HTTP.get_response(URI.parse(url1)).code
+    r2 = Net::HTTP.get_response(URI.parse(url2)).code
+    assert !@s.send(:correct_response_code?, r1)
+    assert @s.send(:correct_response_code?, r2)
+  end
+
   def test_url_making_function_with_proper_input
     assert_equal @s.url,
       "https://www.googleapis.com/books/v1/volumes?q=harry+intitle:harry+potter+inauthor:rowling"
-  end
-
-  def test_correct_search_should_get_code_200
-    assert_equal @s.send(:get_response_code, @s.send(:make_url)), "200"
-  end
-  
-  def test_incorrect_search_should_not_get_code_200
-    url = "https://www.googleapis.com/books/v1/volumes?q=&intitle=harry"
-    assert_not_equal @s.send(:get_response_code, url), "200"
   end
 
   def test_no_parameters_should_result_in_error

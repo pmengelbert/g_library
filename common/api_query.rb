@@ -19,6 +19,10 @@ module ApiQuery
     def get_response_body(url)
       get_response(url).body
     end
+    
+    def correct_response_code?(response_code)
+      return response_code == "200"
+    end
 
     def connected_to_internet?(address = "google.com")
       dns_resolver = Resolv::DNS.new()
