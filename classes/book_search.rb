@@ -14,10 +14,10 @@ class BookSearch
 
     num_results = @args.delete(:num) || 5
 
-    raise ArgumentError unless BookSearch.searchable_arguments?(@args)
+    raise ArgumentError unless self.class.searchable_arguments?(@args)
 
-    @args = BookSearch.format_args(@args)
-    @url = BookSearch.make_url(@args)
+    @args = self.class.format_args(@args)
+    @url = self.class.make_url(@args)
 
     raise NoInternetError unless connected_to_internet?
 
@@ -30,7 +30,7 @@ class BookSearch
     raise NoResults unless num > 0
 
     @selected_results = full_results['items'].first(num_results)
-    @selected_results.map! { |res| BookSearch.format_hash res }
+    @selected_results.map! { |res| self.class.format_hash res }
 
   end
 
