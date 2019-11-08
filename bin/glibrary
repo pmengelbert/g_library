@@ -10,6 +10,7 @@ require_relative '../classes/user_book'
 require_relative '../classes/user_library'
 require_relative '../common/errors'
 require_relative '../common/exec_helper.rb'
+require_relative '../common/command_line_parse.rb'
 
 process_args!
 

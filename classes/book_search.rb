@@ -62,7 +62,7 @@ class BookSearch
 
     def format_args(args)
       result = args.map { |k, v| [k,v].map(&:to_s) }.to_h
-      result.reject { |k, v| v.empty? }
+      result.reject! { |k, v| v.empty? }
       return result.to_h
     end
 
