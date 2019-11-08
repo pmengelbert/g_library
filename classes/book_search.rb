@@ -34,15 +34,11 @@ class BookSearch
 
   end
 
-  #Only five results are iterated over; This behavior is easily changed by either
-  #passing a :num value when initializing a BookSearch, or by using full_results
-  #below, instead of selected_results
   def each
     return to_enum :each unless block_given?
     selected_results.each { |r| yield(r) }
   end
 
-  #Likewise, only five results are accessible here; see the previous note.
   def [](index)
     selected_results[index]
   end
