@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require 'json'
-require 'optparse'
 require 'io/console'
 
 require_relative '../common/api_query'
@@ -16,10 +15,10 @@ DEFAULT_FILENAME =  "../saved_libraries/library.json"
 
 process_args!
 
-#default
+options = {}
 filename = File.join(File.dirname(__FILE__), DEFAULT_FILENAME)
+filename = command_line_parse!(filename, options)
 
-o = {}
 
 filename = command_line_parse!(filename, o)
 prepare_filename_for_os!(filename)
@@ -27,11 +26,8 @@ prepare_filename_for_os!(filename)
 l = UserLibrary.new(filename)
 
 begin
-  s = BookSearch.new(search: ARGV.join('+'), title: o[:title], author: o[:author], publisher: o[:publisher])
+  s = perform_search(options)
 
-  #see BookSearch definition in classes/book_search.rb
-  #the each method (and all Enumerable methods, like map) only operate on
-  #the first five matches.
   books = s.map { |info| UserBook.new(info) }
 
   #print the resuls
@@ -56,7 +52,6 @@ begin
   #add a book to the user's library
   l << books[i]
   l.save
-
 rescue NoInternetError
   puts "\nNo internet connection.  Please connect to the internet and try again."
   puts ""

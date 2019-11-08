@@ -1,3 +1,5 @@
+require 'optparse'
+
 def handle_nonexistent_file(filename, library)
   (puts "Library file not found, cannot display."; exit) if library
   puts "Creating new file"
