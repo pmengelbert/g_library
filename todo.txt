@@ -18,11 +18,6 @@ in the list, or to remove duplicates!
 Code:
 -----
 
--> The Glibrary file is doing a lot - parsing the command line, handling the search
-logic, and formatting the display. Splitting up these responsibilities will make the
-file easier to read and also will help the next person understand what each “module”
-is doing. Check out the Single Responsibility Principle here for more info!
-
 -> If you take a sweep of other classes, you will find similar responsibilities that you
 can group into their own modules! For example, the printing logic inside of the
 user_library class.

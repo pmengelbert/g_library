@@ -8,6 +8,7 @@ require_relative '../common/errors'
 require_relative '../common/exec_helper'
 require_relative '../common/google_api_url'
 require_relative '../common/search_error'
+
 require_relative '../classes/book_search'
 require_relative '../classes/user_book'
 require_relative '../classes/user_library'
@@ -19,7 +20,7 @@ process_args!
 
 options = {}
 filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
-filename = command_line_parse!(filename, options)
+filename, options = command_line_parse!(filename, options)
 
 prepare_filename_for_os!(filename)
 

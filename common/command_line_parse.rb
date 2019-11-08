@@ -55,7 +55,7 @@ def command_line_parse!(filename, o)
 
   end.parse!
 
-  return filename
+  return [filename, o]
 
 end
 
