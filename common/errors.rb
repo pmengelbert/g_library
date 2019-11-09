@@ -1,6 +1,9 @@
 class SearchError < StandardError
 end
 
+class BookDuplicateError < StandardError
+end
+
 class NoInternetError < StandardError
 end
 

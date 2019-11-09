@@ -58,6 +58,8 @@ def search_user_prompt(temp_booklist, persistent_library)
       handle_successful_prompt_completion(selected_book)
       break
 
+    rescue BookDuplicateError
+      puts "\nThat book is already in your reading list.  Would you like to add another?"
     rescue SelectionError
       puts "\nSorry, your selection was invalid.  Please try again."
     rescue DataError

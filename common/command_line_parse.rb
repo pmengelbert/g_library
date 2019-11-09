@@ -5,11 +5,6 @@ def handle_nonexistent_file(filename, library)
   puts "Creating new file"
 end
 
-def initialize_and_print_library(filename)
-  l = UserLibrary.new(filename)
-  l.pretty_print
-end
-
 def print_help_message(opts)
   puts ""
   puts opts
@@ -38,7 +33,6 @@ def command_line_parse!(filename, o)
 
     opts.on("-f", "--lib-file=LIBFILE",
             "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-
       filename = File.absolute_path(libfile)
       handle_nonexistent_file(filename) unless File.exist?(filename, library)
     end

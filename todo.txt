@@ -4,13 +4,6 @@ Thank you for completing this project. We appreciate the time you put into your 
 
 I reviewed your Technical Assessment, and have the following feedback to share with you:
 
-UI / General feedback:
-----------------------
-
-->  If I add a book more than one time to my list, it shows up twice.  It would be
-great to have a way to either tell the user that the book already exists in the list,
-or to remove duplicates!
-
 Code:
 -----
 
