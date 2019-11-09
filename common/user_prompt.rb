@@ -1,6 +1,6 @@
 def handle_user_input(selection)
   raise SelectionError unless selection =~ /\A[1-5]|[qQ]\Z/
-  raise UserQuits if selection =~ /\Aq\Z/
+  raise UserQuits if selection =~ /\A[Qq]\Z/
   selection = selection.to_i
   return selection - 1
 end

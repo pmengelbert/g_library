@@ -50,6 +50,14 @@ class UserLibrary
     File.write(filename, to_json)
   end
 
+  def size
+    @books.size
+  end
+
+  def length
+    size
+  end
+
   #Iterates over ALL books
   def each
     return to_enum :each unless block_given?
