@@ -11,7 +11,6 @@ def handle_successful_prompt_completion(selected_book)
   puts "The book \"#{selected_book['title']}\" has been added to your reading list."
 end
 
-
 def prompt(prompt, regexp, library)
   print prompt
   s = STDIN.gets.strip

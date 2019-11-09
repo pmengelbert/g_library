@@ -1,2 +1,0 @@
-class SearchError < StandardError
-end

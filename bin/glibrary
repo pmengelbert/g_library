@@ -7,7 +7,6 @@ require_relative '../common/command_line_parse'
 require_relative '../common/errors'
 require_relative '../common/exec_helper'
 require_relative '../common/google_api_url'
-require_relative '../common/search_error'
 require_relative '../common/user_prompt'
 
 require_relative '../classes/book_search'
