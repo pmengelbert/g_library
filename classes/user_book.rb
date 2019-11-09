@@ -23,8 +23,14 @@ class UserBook
     @publisher = info['publisher'] || ""
   end
 
-  #get any attribute, like with a hash
-  #ex self['title']
+  def pretty_export
+    str = []
+    %w[title author publisher].each do |ind|
+      str << "%s: %s" % [ind.capitalize, self[ind]]
+    end
+    return str.join("\n")
+  end
+
   def [](key)
     return authors if key =~ /authors?/i
     info[key]

@@ -67,12 +67,11 @@ class UserLibrary
   #For printing to the console
   def pretty_print
     puts ""
-    each do |b|
-      puts "-"*5 + b['id'] + "-" * 5
-      %w[title author publisher].each do |ind|
-        puts "%s: %s" % [ind.capitalize, b[ind]]
-      end
-    puts ""
+    each_with_index do |b, i|
+      j = i+1
+      puts "%s%s%s" % ["#{j}.)--", b['id'], "-----"]
+      puts b.pretty_export
+      puts ""
     end
     puts ""
   end
