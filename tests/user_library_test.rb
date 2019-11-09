@@ -1,4 +1,6 @@
 require 'test/unit'
+
+require_relative '../classes/book_search.rb'
 require_relative '../classes/user_library.rb'
 
 class UserLibraryTest < Test::Unit::TestCase
@@ -8,6 +10,14 @@ class UserLibraryTest < Test::Unit::TestCase
     b = UserBook.new(s[0])
     @l = UserLibrary.new("/tmp/library.json")
     @l.add(b)
+  end
+
+  def test_delete_method
+    ul = UserLibrary.new("", nonpersistent: true)
+    ul.add({})
+    assert ul.to_a.size == 1
+    ul.delete(0)
+    assert ul.to_a.size == 0
   end
 
   def test_for_invalid_JSON_data

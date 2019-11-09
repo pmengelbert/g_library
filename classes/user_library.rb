@@ -37,6 +37,10 @@ class UserLibrary
     @books << book
   end
 
+  def delete(index)
+    @books.delete_at(index)
+  end
+
   def <<(book)
     add(book)
   end
