@@ -31,13 +31,11 @@ temp_booklist = UserLibrary.new("", nonpersistent: true)
 
 begin
   search_results = perform_search(options)
-  search_results.selected_results.each do |info| 
-    temp_booklist.add(UserBook.new(info)) 
-  end
+  search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
 
   temp_booklist.pretty_print
 
-  exec_user_prompt(temp_booklist, persistent_library)
+  search_user_prompt(temp_booklist, persistent_library)
 
 rescue UserQuits
   puts "\nThanks for browsing.  Nothing has been added to the reading list."

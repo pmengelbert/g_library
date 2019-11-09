@@ -1,26 +1,56 @@
-def handle_user_input(selection)
-  raise SelectionError unless selection =~ /\A[1-5]|[qQ]\Z/
+def verify_selection(selection, regexp)
+  raise SelectionError unless selection =~ regexp
   raise UserQuits if selection =~ /\A[Qq]\Z/
-  selection = selection.to_i
-  return selection - 1
 end
 
-def get_book_number
-  print "Enter a number (1-5) to add a book to your reading list (or q to quit): "
-  selection = STDIN.gets.strip
-  i = handle_user_input(selection)
-  return i
+def process_selection(selection)
+  return selection.to_i - 1
 end
 
 def handle_successful_prompt_completion(selected_book)
   puts "The book \"#{selected_book['title']}\" has been added to your reading list."
 end
 
-def exec_user_prompt(temp_booklist, persistent_library)
+
+def prompt(prompt, regexp, library)
+  print prompt
+  s = STDIN.gets.strip
+  verify_selection(s, regexp)
+  s = process_selection(s)
+  raise DataError unless s <= library.size
+  return s
+end
+
+def library_mode_user_prompt(library)
+  while true
+    begin
+      i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,
+             library )
+
+      library.delete(i)
+      library.pretty_print
+
+      puts "Your library now looks like this."
+      puts ""
+    rescue SelectionError
+      puts "\nSorry, your selection was invalid. Please try again."
+    rescue DataError
+      puts "\nSorry, your selection was invalid. Make sure your selection is in the provided range."
+    rescue UserQuits
+      library.save
+      puts "\nEnjoy your day."
+      exit
+    end
+  end
+end
+
+
+def search_user_prompt(temp_booklist, persistent_library)
   while true
     begin
 
-      i = get_book_number
+      i = prompt( "Enter a number (1-5) to add a book to your reading list (or q to quit): ",
+              /\A[1-5]|[qQ]\Z/, temp_booklist )
       selected_book = temp_booklist[i]
 
       persistent_library << selected_book

@@ -17,32 +17,6 @@ def print_help_message(opts)
   puts ""
 end
 
-def ask_to_delete_from(library)
-  while true
-    begin
-      print "Select a book number to delete, or type \"q\" to quit: "
-      selection = STDIN.gets.strip
-      raise SelectionError unless selection =~ /\A([0-9]+|[qQ])\Z/
-      raise UserQuits if selection =~/\A[qQ]\Z/
-      selection = selection.to_i
-      selection = selection - 1
-      raise DataError unless selection <= library.size
-      library.delete(selection)
-      library.pretty_print
-      puts "Your library now looks like this."
-      puts ""
-    rescue SelectionError
-      puts "\nSorry, your selection was invalid. Please try again."
-    rescue DataError
-      puts "\nSorry, your selection was invalid. Make sure your selection is in the provided range."
-    rescue UserQuits
-      library.save
-      puts "\nEnjoy your day."
-      exit
-    end
-  end
-end
-
 
 def command_line_parse!(filename, o)
 
@@ -72,7 +46,7 @@ def command_line_parse!(filename, o)
     opts.on("-l", "--library", "See your library; ignores all search options") do
       prepare_filename_for_os!(filename)
       (l = UserLibrary.new(filename)).pretty_print
-      selection = ask_to_delete_from(l)
+      library_mode_user_prompt(l)
       exit
     end
 
