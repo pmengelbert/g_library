@@ -40,7 +40,7 @@ def command_line_parse!(filename, o)
     opts.on("-l", "--library", "See your library; ignores all search options") do
       prepare_filename_for_os!(filename)
       (l = UserLibrary.new(filename)).pretty_print
-      library_mode_user_prompt(l)
+      UserPrompt::library_mode_user_prompt(l)
       exit
     end
 

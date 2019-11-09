@@ -14,6 +14,7 @@ require_relative '../classes/user_book'
 require_relative '../classes/user_library'
 
 include ExecHelper
+include UserPrompt
 
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  "../saved_libraries/library.json"
@@ -36,7 +37,7 @@ begin
 
   temp_booklist.pretty_print
 
-  search_user_prompt(temp_booklist, persistent_library)
+  UserPrompt::search_user_prompt(temp_booklist, persistent_library)
 
 rescue UserQuits
   puts "\nThanks for browsing.  Nothing has been added to the reading list."
