@@ -8,12 +8,12 @@ class UserLibraryTest < Test::Unit::TestCase
   def setup
     s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
     b = UserBook.new(s[0])
-    @l = UserLibrary.new("/tmp/library.json")
+    @l = UserLibrary.new(filename: "/tmp/library.json")
     @l.add(b)
   end
 
   def test_delete_method
-    ul = UserLibrary.new("", nonpersistent: true)
+    ul = UserLibrary.new(nonpersistent: true)
     ul.add({})
     assert ul.to_a.size == 1
     ul.delete(0)
@@ -22,7 +22,7 @@ class UserLibraryTest < Test::Unit::TestCase
 
   def test_for_invalid_JSON_data
     File.write("/tmp/test.json", "908ygu08ygyuiu-9u0hi////{}{}{}:")
-    assert_raise(JSON::ParserError) { UserLibrary.new("/tmp/test.json") }
+    assert_raise(JSON::ParserError) { UserLibrary.new(filename: "/tmp/test.json") }
   end
 
   def test_for_invalid_books
