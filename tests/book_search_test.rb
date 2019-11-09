@@ -4,6 +4,7 @@ require_relative '../classes/book_search.rb'
 class TestBookSearch < Test::Unit::TestCase
 
   def setup
+    #Assumes we are connected to the internet
     @s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
   end
 
@@ -20,7 +21,6 @@ class TestBookSearch < Test::Unit::TestCase
 
   def test_connected_to_internet?
     assert !@s.send(:connected_to_internet?, "jidooifj.iuhewi")
-    #assumes we are connected to the internet
     assert @s.send(:connected_to_internet?)
   end
 

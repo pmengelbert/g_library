@@ -23,12 +23,10 @@ class UserLibrary
         end
 
       else
-        #the default filename
         @filename = File.absolute_path("saved_libraries/library.json")
       end
     end
 
-    #If the wrong type of data is provided
     raise ArgumentError unless books.all? { |b| valid?(b) }
   end
 
@@ -59,7 +57,6 @@ class UserLibrary
     size
   end
 
-  #Iterates over ALL books
   def each
     return to_enum :each unless block_given?
     @books.each { |b| yield(b) }
@@ -69,7 +66,6 @@ class UserLibrary
     @books[index]
   end
 
-  #For saving to files
   def to_json
     a = @books.map do |b| 
       b.info 
@@ -77,7 +73,6 @@ class UserLibrary
     JSON.pretty_generate(a)
   end
 
-  #For printing to the console
   def pretty_print
     puts ""
     each_with_index do |b, i|
@@ -90,12 +85,10 @@ class UserLibrary
   end
 
   private
-    #make sure whatever gets passed in responds to the ':info' message
     def valid?(b)
       b.respond_to?(:info)
     end
 
-    #for testing purposes
     def set_filename(name)
       @filename = name
     end
