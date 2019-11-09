@@ -29,9 +29,9 @@ persistent_library = UserLibrary.new(filename)
 temp_booklist = UserLibrary.new("", nonpersistent: true)
 
 begin
-  s = perform_search(options)
+  search_results = perform_search(options)
 
-  s.each { |info| temp_booklist.add(UserBook.new(info)) }
+  search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
 
   temp_booklist.pretty_print
   i = get_book_number
