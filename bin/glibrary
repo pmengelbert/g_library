@@ -28,9 +28,9 @@ filename, options = CommandLineParse::command_line_parse!(filename, options)
 
 ExecHelper::prepare_filename_for_os!(filename)
 
-persistent_library = UserLibrary.new(filename)
+persistent_library = UserLibrary.new(filename: filename)
 
-temp_booklist = UserLibrary.new("", nonpersistent: true)
+temp_booklist = UserLibrary.new(nonpersistent: true)
 
 begin
   search_results = ExecHelper::perform_search(options)

@@ -7,27 +7,23 @@ class UserLibrary
 
   attr_reader :books, :filename
 
-  def initialize(sourcefile = nil, args = {})
+  def initialize(args = {})
 
     @books = []
 
     unless (@nonpersistent = args[:nonpersistent])
-      if sourcefile
-        @filename = File.absolute_path(sourcefile)
+      @filename = File.absolute_path(args[:filename]) || 
+        File.absolute_path("saved_libraries/library.json")
 
-        if File.exist?(filename)
-          file = File.open(filename)
-          book_array = JSON.parse(file.read)
-          
-          @books = book_array.map { |d| UserBook.new(d) }
-        end
-
-      else
-        @filename = File.absolute_path("saved_libraries/library.json")
+      if File.exist?(filename)
+        file = File.open(filename)
+        book_array = JSON.parse(file.read)
+        
+        @books = book_array.map { |d| UserBook.new(d) }
+        raise ArgumentError unless books.all? { |b| valid?(b) }
       end
     end
 
-    raise ArgumentError unless books.all? { |b| valid?(b) }
   end
 
   def add(book)
@@ -38,6 +34,10 @@ class UserLibrary
 
   def delete(index)
     @books.delete_at(index)
+  end
+
+  def nonperistent?
+    @nonpersistent
   end
 
   def <<(book)
