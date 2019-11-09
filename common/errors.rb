@@ -9,3 +9,6 @@ end
 
 class DataError < StandardError
 end
+
+class PersistenceError < StandardError
+end

@@ -24,27 +24,28 @@ filename, options = command_line_parse!(filename, options)
 
 prepare_filename_for_os!(filename)
 
-l = UserLibrary.new(filename)
+persistent_library = UserLibrary.new(filename)
+
+temp_booklist = UserLibrary.new("", nonpersistent: true)
 
 begin
   s = perform_search(options)
 
-  books = s.map { |info| UserBook.new(info) }
+  s.each { |info| temp_booklist.add(UserBook.new(info)) }
 
-  print_book_results(books)
+  temp_booklist.pretty_print
   i = get_book_number
 
-  l << books[i]
-  l.save
+  persistent_library << temp_booklist[i]
+  persistent_library.save
 rescue NoInternetError
   puts "\nNo internet connection.  Please connect to the internet and try again."
   puts ""
 rescue SearchError 
   puts "\nThere was an error with your query; be careful to format it well"
   puts ""
-  exit
 rescue NoResults
   puts "\nNo results."
   puts ""
-  exit
 end
+exit

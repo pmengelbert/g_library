@@ -34,7 +34,6 @@ class UserBook
     @authors.join(', ')
   end
 
-  #Be a little bit forgiving if the user types "authors"
   def author
     authors
   end

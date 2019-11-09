@@ -7,29 +7,25 @@ class UserLibrary
 
   attr_reader :books, :filename
 
-  def initialize(sourcefile = nil)
+  def initialize(sourcefile = nil, args = {})
 
     @books = []
 
-    if sourcefile
-      @filename = File.absolute_path(sourcefile)
+    unless (@nonpersistent = args[:nonpersistent])
+      if sourcefile
+        @filename = File.absolute_path(sourcefile)
 
-      #If the file already exists, it will be read and the
-      #@books array will be filled
-      if File.exist?(filename)
-        file = File.open(filename)
-        book_array = JSON.parse(file.read)
-        
-        #If the UserBook initialize method changes, so must this; This
-        #is the only place where there's an explicit dependency on UserBook.
-        #If this line is changed, the rest of the class may still work as long
-        #as the elements in @books respond to the ':info' message
-        @books = book_array.map { |d| UserBook.new(d) }
+        if File.exist?(filename)
+          file = File.open(filename)
+          book_array = JSON.parse(file.read)
+          
+          @books = book_array.map { |d| UserBook.new(d) }
+        end
+
+      else
+        #the default filename
+        @filename = File.absolute_path("saved_libraries/library.json")
       end
-
-    else
-      #the default filename
-      @filename = File.absolute_path("saved_libraries/library.json")
     end
 
     #If the wrong type of data is provided
@@ -46,6 +42,7 @@ class UserLibrary
   end
 
   def save
+    raise PersistenceError if @nonpersistent
     File.write(filename, to_json)
   end
 
