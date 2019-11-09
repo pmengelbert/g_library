@@ -15,6 +15,7 @@ require_relative '../classes/user_library'
 
 include ExecHelper
 include UserPrompt
+include CommandLineParse
 
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  "../saved_libraries/library.json"
@@ -23,7 +24,7 @@ ExecHelper::process_args!
 
 options = {}
 filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
-filename, options = command_line_parse!(filename, options)
+filename, options = CommandLineParse::command_line_parse!(filename, options)
 
 ExecHelper::prepare_filename_for_os!(filename)
 
