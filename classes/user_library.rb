@@ -29,11 +29,11 @@ class UserLibrary
     end
 
     #If the wrong type of data is provided
-    raise ArgumentError "Invalid Data" unless books.all? { |b| valid?(b) }
+    raise ArgumentError unless books.all? { |b| valid?(b) }
   end
 
   def add(book)
-    (raise DataError "Invalid Data"; return) unless valid?(book)
+    (raise DataError; return) unless valid?(book)
     @books << book
   end
 

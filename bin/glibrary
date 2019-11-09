@@ -8,6 +8,7 @@ require_relative '../common/errors'
 require_relative '../common/exec_helper'
 require_relative '../common/google_api_url'
 require_relative '../common/search_error'
+require_relative '../common/user_prompt'
 
 require_relative '../classes/book_search'
 require_relative '../classes/user_book'
@@ -30,14 +31,16 @@ temp_booklist = UserLibrary.new("", nonpersistent: true)
 
 begin
   search_results = perform_search(options)
-
-  search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
+  search_results.selected_results.each do |info| 
+    temp_booklist.add(UserBook.new(info)) 
+  end
 
   temp_booklist.pretty_print
-  i = get_book_number
 
-  persistent_library << temp_booklist[i]
-  persistent_library.save
+  exec_user_prompt(temp_booklist, persistent_library)
+
+rescue UserQuits
+  puts "\nThanks for browsing.  Nothing has been added to the reading list."
 rescue NoInternetError
   puts "\nNo internet connection.  Please connect to the internet and try again."
   puts ""
