@@ -11,7 +11,9 @@ class UserLibrary
 
     @books = []
 
-    load_saved_library(args[:filename]) unless (@nonpersistent = args[:nonpersistent])
+    @filename = nil
+
+    load_saved_library!(args[:filename]) unless (@nonpersistent = args[:nonpersistent])
 
   end
 
@@ -82,7 +84,7 @@ class UserLibrary
       @filename = name
     end
 
-    def load_saved_library(filename)
+    def load_saved_library!(filename)
       @filename = File.absolute_path(filename || "saved_libraries/library.json")
 
       if File.exist?(filename)
