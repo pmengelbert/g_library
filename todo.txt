@@ -4,13 +4,6 @@ Thank you for completing this project. We appreciate the time you put into your 
 
 I reviewed your Technical Assessment, and have the following feedback to share with you:
 
-Code:
------
-
--> If you take a sweep of other classes, you will find similar responsibilities that you
-can group into their own modules! For example, the printing logic inside of the
-user_library class.
-
 General Question:
 -----------------
 
