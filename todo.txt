@@ -6,10 +6,6 @@ I reviewed your Technical Assessment, and have the following feedback to share w
 
 UI / General feedback:
 ----------------------
--> It would be nice to have the UI list prompt display something to the user after the
-user chooses a book to add. The messaging is the same whether the user chooses a book
-or quits the program, so something that affirms the user’s choice would be helpful.
-
 -> There's a mismatch between the name of the test directory (tests) and the README
 directions (test) If I add a book more than one time to my list, it shows up twice.
 It would be great to have a way to either tell the user that the book already exists
