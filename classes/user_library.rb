@@ -85,7 +85,8 @@ class UserLibrary
     end
 
     def load_saved_library!(filename)
-      @filename = File.absolute_path(filename || "saved_libraries/library.json")
+      f = filename || "saved_libraries/library.json"
+      @filename = File.absolute_path(f)
 
       if File.exist?(filename)
         file = File.open(filename)
