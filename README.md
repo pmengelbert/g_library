@@ -156,14 +156,14 @@ relative to the repository's main directory.
 
 glibrary comes with a suite of unit tests, in the following files:
 ```
-test/book_search_test.rb
-test/user_book_test.rb
-test/user_library_test.rb
+tests/book_search_test.rb
+tests/user_book_test.rb
+tests/user_library_test.rb
 ```
 
 Run all the tests at once with:
 ```
-% ruby test/unit_tests.rb
+% ruby tests/unit_tests.rb
 ```
 
 # Built With

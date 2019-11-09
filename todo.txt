@@ -6,10 +6,10 @@ I reviewed your Technical Assessment, and have the following feedback to share w
 
 UI / General feedback:
 ----------------------
--> There's a mismatch between the name of the test directory (tests) and the README
-directions (test) If I add a book more than one time to my list, it shows up twice.
-It would be great to have a way to either tell the user that the book already exists
-in the list, or to remove duplicates!
+
+->  If I add a book more than one time to my list, it shows up twice.  It would be
+great to have a way to either tell the user that the book already exists in the list,
+or to remove duplicates!
 
 Code:
 -----
