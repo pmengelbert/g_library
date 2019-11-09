@@ -1,4 +1,3 @@
-
 module CommandLineParse
   require 'optparse'
   def handle_nonexistent_file(filename, library)
@@ -51,8 +50,6 @@ module CommandLineParse
       end
 
     end.parse!
-
     return [filename, o]
-
   end
 end
