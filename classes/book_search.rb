@@ -73,18 +73,14 @@ class BookSearch
     end
 
 
-    #gets the 'volumeInfo' property from the results, and adds the 'id' property.
     def format_hash(hash)
       hash['volumeInfo'].merge( { 'id' => hash['id'] } )
     end
 
-    #Add the base url and the formatted arg list together, and make sure
-    #there are no spaces
     def make_url(args)
       (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
     end
 
-    #for testing purposes only
     def args
       @args
     end

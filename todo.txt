@@ -11,11 +11,6 @@ Code:
 can group into their own modules! For example, the printing logic inside of the
 user_library class.
 
--> Lots of comments - with the help of expressive naming and easy-to-follow small
-functions, we can avoid using comments altogether to explain what the code is doing.
-I would encourage you to remove your comments while thinking: 'without this comment,
-  would the code make sense to anyone other than myself?'
-
 General Question:
 -----------------
 
