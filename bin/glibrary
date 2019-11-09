@@ -13,23 +13,25 @@ require_relative '../classes/book_search'
 require_relative '../classes/user_book'
 require_relative '../classes/user_library'
 
+include ExecHelper
+
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  "../saved_libraries/library.json"
 
-process_args!
+ExecHelper::process_args!
 
 options = {}
 filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
 filename, options = command_line_parse!(filename, options)
 
-prepare_filename_for_os!(filename)
+ExecHelper::prepare_filename_for_os!(filename)
 
 persistent_library = UserLibrary.new(filename)
 
 temp_booklist = UserLibrary.new("", nonpersistent: true)
 
 begin
-  search_results = perform_search(options)
+  search_results = ExecHelper::perform_search(options)
   search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
 
   temp_booklist.pretty_print
