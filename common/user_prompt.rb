@@ -6,8 +6,7 @@ def handle_user_input(selection)
 end
 
 def get_book_number
-  print "Enter a number (1-5) to add a book to your reading list:\
-  (or q to quit)\n"
+  print "Enter a number (1-5) to add a book to your reading list (or q to quit): "
   selection = STDIN.gets.strip
   i = handle_user_input(selection)
   return i
