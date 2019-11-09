@@ -58,8 +58,7 @@ module UserPrompt
         persistent_library.save
 
         handle_successful_prompt_completion(selected_book)
-        break
-
+        puts "Would you like to add another?"
       rescue BookDuplicateError
         puts "\nThat book is already in your reading list.  Would you like to add another?"
       rescue SelectionError
