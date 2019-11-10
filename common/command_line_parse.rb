@@ -34,7 +34,7 @@ module CommandLineParse
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
         filename = File.absolute_path(libfile)
-        handle_nonexistent_file(filename) unless File.exist?(filename, library)
+        handle_nonexistent_file(filename, library) unless File.exist?(filename)
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
