@@ -1,8 +1,8 @@
 require 'test/unit'
-require_relative '../common/user_prompt'
-require_relative '../common/errors'
-require_relative '../classes/user_library'
-require_relative '../classes/book_search'
+require_relative '../modules/user_prompt'
+require_relative '../modules/errors'
+require_relative '../lib/user_library'
+require_relative '../lib/book_search'
 
 class TestUserPrompt < Test::Unit::TestCase
   include UserPrompt

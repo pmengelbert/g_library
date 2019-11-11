@@ -1,6 +1,6 @@
 require 'json'
-require_relative '../common/errors'
-require_relative '../common/exec_helper'
+require_relative '../modules/errors'
+require_relative '../modules/exec_helper'
 require_relative 'user_book'
 
 

@@ -1,7 +1,7 @@
 require 'test/unit'
 
-require_relative '../classes/book_search.rb'
-require_relative '../classes/user_library.rb'
+require_relative '../lib/book_search.rb'
+require_relative '../lib/user_library.rb'
 
 class UserLibraryTest < Test::Unit::TestCase
   include Errors

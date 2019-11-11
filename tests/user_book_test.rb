@@ -1,6 +1,6 @@
 require 'test/unit'
-require_relative '../common/errors'
-require_relative '../classes/user_book'
+require_relative '../modules/errors'
+require_relative '../lib/user_book'
 
 class UserBookTest < Test::Unit::TestCase
   include Errors

@@ -2,16 +2,16 @@
 require 'json'
 require 'io/console'
 
-require_relative '../common/api_query'
-require_relative '../common/command_line_parse'
-require_relative '../common/errors'
-require_relative '../common/exec_helper'
-require_relative '../common/google_api_url'
-require_relative '../common/user_prompt'
+require_relative '../modules/api_query'
+require_relative '../modules/command_line_parse'
+require_relative '../modules/errors'
+require_relative '../modules/exec_helper'
+require_relative '../modules/google_api_url'
+require_relative '../modules/user_prompt'
 
-require_relative '../classes/book_search'
-require_relative '../classes/user_book'
-require_relative '../classes/user_library'
+require_relative '../lib/book_search'
+require_relative '../lib/user_book'
+require_relative '../lib/user_library'
 
 include ExecHelper
 include UserPrompt
