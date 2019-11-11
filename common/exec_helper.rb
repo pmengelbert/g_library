@@ -9,7 +9,8 @@ module ExecHelper
   end
 
   def perform_search(o)
-    s = BookSearch.new(search: ARGV.join('+'), title: o[:title], author: o[:author], 
+    search = o[:search] || AGV.join('+')
+    s = BookSearch.new(search: search, title: o[:title], author: o[:author], 
                        publisher: o[:publisher])
   end
 end

@@ -1,5 +1,6 @@
 require 'test/unit'
 require_relative '../common/exec_helper.rb'
+require_relative '../classes/book_search.rb'
 
 class TestExecHelper < Test::Unit::TestCase
   include ExecHelper
@@ -16,6 +17,15 @@ class TestExecHelper < Test::Unit::TestCase
     prepare_filename_for_os!(s)
     ENV.delete("test")
     assert s=~ /\\/
+  end
+
+  #assumes internet connection
+  def test_perform_search_with_successful_search
+    assert !perform_search(search: "harry potter", title: "azkaban", author: "rowling").nil?
+  end
+
+  def test_perform_search_with_bad_search
+    assert_raise( NoResults ) { perform_search(search: "2039iodwioujoi\\erw4093") }
   end
 
 end
