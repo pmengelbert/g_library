@@ -65,14 +65,19 @@ class UserLibrary
   end
 
   def pretty_print
-    puts ""
+    puts pretty_export
+  end
+
+  def pretty_export
+    a = [""]
     each_with_index do |b, i|
       j = i+1
-      puts "%s%s%s" % ["#{j}.)--", b['id'], "-----"]
-      puts b.pretty_export
-      puts ""
+      a << "%s%s%s" % ["#{j}.)--", b['id'], "-----"]
+      a << b.pretty_export
+      a << ""
     end
-    puts ""
+    a << ""
+    a.join("\n")
   end
 
   private
