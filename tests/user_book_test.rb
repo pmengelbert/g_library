@@ -1,7 +1,9 @@
 require 'test/unit'
+require_relative '../common/errors'
 require_relative '../classes/user_book'
 
 class UserBookTest < Test::Unit::TestCase
+  include Errors
 
   SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
 

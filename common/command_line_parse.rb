@@ -1,5 +1,14 @@
+require_relative 'exec_helper'
+require_relative 'user_prompt'
+require_relative 'errors'
+require_relative '../classes/user_library'
+
 module CommandLineParse
   require 'optparse'
+  include ExecHelper
+  include UserPrompt
+  include Errors
+
   def handle_nonexistent_file(filename, library)
     (puts "Library file not found, cannot display."; exit) if library
     puts "Creating new file"
@@ -13,7 +22,7 @@ module CommandLineParse
   end
 
 
-  def command_line_parse!(filename, o)
+  def command_line_parse!(filename, o, suppress = nil)
 
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
@@ -40,7 +49,7 @@ module CommandLineParse
       opts.on("-l", "--library", "See your library; ignores all search options") do
         prepare_filename_for_os!(@filename)
         (l = UserLibrary.new(filename: @filename)).pretty_print
-        UserPrompt::library_mode_user_prompt(l)
+        library_mode_user_prompt(l) unless suppress
         exit
       end
 

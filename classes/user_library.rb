@@ -7,6 +7,7 @@ require_relative 'user_book'
 class UserLibrary
   include Enumerable
   include ExecHelper
+  include Errors
 
   attr_reader :books, :filename
 

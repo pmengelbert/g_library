@@ -1,4 +1,8 @@
+require_relative 'errors'
+
 module UserPrompt
+  include Errors
+
   def verify_selection(selection, regexp)
     raise SelectionError unless selection =~ regexp
     raise UserQuits if selection =~ /\A[Qq]\Z/

@@ -1,9 +1,11 @@
 require 'test/unit'
 require_relative '../common/exec_helper.rb'
+require_relative '../common/errors'
 require_relative '../classes/book_search.rb'
 
 class TestExecHelper < Test::Unit::TestCase
   include ExecHelper
+  include Errors
 
   def test_process_args_method
     args = %w[harry potter -l -f /tmp/library.json]

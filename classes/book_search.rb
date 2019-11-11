@@ -6,6 +6,7 @@ require_relative '../common/errors'
 class BookSearch
   include ApiQuery
   include Enumerable
+  include Errors
 
   attr_reader :selected_results, :full_results, :url
 
