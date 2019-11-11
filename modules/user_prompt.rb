@@ -26,7 +26,8 @@ module UserPrompt
     return s
   end
 
-  def library_mode_user_prompt(library)
+  def library_mode_user_prompt
+    (library = UserLibrary.new(filename: @filename)).pretty_print
     while true
       begin
         i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,

@@ -28,6 +28,11 @@ filename, options = command_line_parse!(filename, options)
 
 prepare_filename_for_os!(filename)
 
+if options.nil?
+  @filename = filename
+  library_mode_user_prompt
+end
+
 persistent_library = UserLibrary.new(filename: filename)
 
 temp_booklist = UserLibrary.new(nonpersistent: true)

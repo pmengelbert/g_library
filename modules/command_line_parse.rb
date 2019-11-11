@@ -6,8 +6,6 @@ require_relative '../lib/user_library'
 module CommandLineParse
   require 'optparse'
   include Errors
-  include UserPrompt
-  include ExecHelper
 
   def handle_nonexistent_file(filename, library)
     (puts "Library file not found, cannot display."; exit) if library
@@ -47,12 +45,7 @@ module CommandLineParse
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
-        prepare_filename_for_os!(filename)
-        unless suppress
-          (l = UserLibrary.new(filename: filename)).pretty_print
-          library_mode_user_prompt(l) 
-          exit
-        end
+        return [filename, nil]
       end
 
       opts.on("-h", "--help", "Prints this help") do
