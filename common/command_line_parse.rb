@@ -16,8 +16,8 @@ module CommandLineParse
   def command_line_parse!(filename, o)
 
     OptionParser.new do |opts|
-      opts.banner = "Usage: ruby g_library.rb [options...] [query]"
-      library = opts.default_argv.include?("-l")
+      opts.banner = "Usage: glibrary [options...] [query]"
+      @library = opts.default_argv.include?("-l")
 
       opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
         o[:title] = t
@@ -33,13 +33,13 @@ module CommandLineParse
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        filename = File.absolute_path(libfile)
-        handle_nonexistent_file(filename, library) unless File.exist?(filename)
+        @filename = File.absolute_path(libfile)
+        handle_nonexistent_file(@filename, @library) unless File.exist?(@filename)
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
-        prepare_filename_for_os!(filename)
-        (l = UserLibrary.new(filename: filename)).pretty_print
+        prepare_filename_for_os!(@filename)
+        (l = UserLibrary.new(filename: @filename)).pretty_print
         UserPrompt::library_mode_user_prompt(l)
         exit
       end
@@ -50,6 +50,6 @@ module CommandLineParse
       end
 
     end.parse!
-    return [filename, o]
+    return [@filename, o]
   end
 end
