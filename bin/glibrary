@@ -20,15 +20,15 @@ include CommandLineParse
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  "../saved_libraries/library.json"
 
-ExecHelper::process_args!
+process_args!
 
 options = {}
-filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
-filename, options = CommandLineParse::command_line_parse!(filename, options)
+@filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
+@filename, options = CommandLineParse::command_line_parse!(@filename, options)
 
-ExecHelper::prepare_filename_for_os!(filename)
+prepare_filename_for_os!
 
-persistent_library = UserLibrary.new(filename: filename)
+persistent_library = UserLibrary.new(filename: @filename)
 
 temp_booklist = UserLibrary.new(nonpersistent: true)
 
@@ -38,7 +38,7 @@ begin
 
   temp_booklist.pretty_print
 
-  UserPrompt::search_user_prompt(temp_booklist, persistent_library)
+  search_user_prompt(temp_booklist, persistent_library)
 
 rescue UserQuits
   puts "\nThanks for browsing.  Nothing has been added to the reading list."

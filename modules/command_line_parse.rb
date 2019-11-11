@@ -47,7 +47,7 @@ module CommandLineParse
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
-        prepare_filename_for_os!(@filename)
+        prepare_filename_for_os!
         unless suppress
           (l = UserLibrary.new(filename: @filename)).pretty_print
           library_mode_user_prompt(l) 
