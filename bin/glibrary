@@ -26,7 +26,7 @@ options = {}
 filename = DEFAULT_FILENAME
 filename, options = CommandLineParse::command_line_parse!(filename, options)
 
-prepare_filename_for_os!
+prepare_filename_for_os!(filename)
 
 persistent_library = UserLibrary.new(filename: @filename)
 

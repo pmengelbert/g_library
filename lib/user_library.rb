@@ -102,7 +102,7 @@ class UserLibrary
 
     def determine_filename!
       @filename = File.absolute_path(@filename)
-      prepare_filename_for_os!
+      prepare_filename_for_os!(@filename)
     end
 
     def get_raw_JSON_data
