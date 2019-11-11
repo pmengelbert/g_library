@@ -17,7 +17,9 @@ class UserLibrary
     @nonpersistent = args[:nonpersistent]
 
     unless nonpersistent?
-      @filename = args[:filename] || "saved_libraries/library.json"
+      @filename = args[:filename] || 
+        File.join(File.dirname(__FILE__), "../saved_libraries/library.json")
+
       determine_filename!
       load_saved_library!
     end
