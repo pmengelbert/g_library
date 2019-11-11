@@ -3,9 +3,11 @@ require_relative '../classes/book_search.rb'
 
 class TestBookSearch < Test::Unit::TestCase
 
+  SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
+
   def setup
     #Assumes we are connected to the internet
-    @s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
+    @s = SEARCH_RESULTS
   end
 
   def test_searchable_arguments_function

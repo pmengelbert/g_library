@@ -3,8 +3,10 @@ require_relative '../classes/user_book'
 
 class UserBookTest < Test::Unit::TestCase
 
+  SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
+
   def setup
-    s = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
+    s = SEARCH_RESULTS
     @b = UserBook.new(s[0])
   end
 

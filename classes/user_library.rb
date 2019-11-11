@@ -1,24 +1,30 @@
 require 'json'
 require_relative '../common/errors'
+require_relative '../common/exec_helper'
 require_relative 'user_book'
+
 
 class UserLibrary
   include Enumerable
+  include ExecHelper
 
   attr_reader :books, :filename
 
   def initialize(args = {})
 
     @books = []
+    @nonpersistent = args[:nonpersistent]
 
-    @filename = nil
-
-    load_saved_library!(args[:filename]) unless (@nonpersistent = args[:nonpersistent])
+    unless nonpersistent?
+      @filename = args[:filename] || "saved_libraries/library.json"
+      determine_filename!
+      load_saved_library!
+    end
 
   end
 
   def add(book)
-    (raise NotABook; return) unless valid?(book)
+    raise NotABook unless valid?(book)
     raise BookDuplicateError if any? { |b| b['id'] == book['id'] }
     @books << book
   end
@@ -86,18 +92,25 @@ class UserLibrary
     end
 
     def set_filename(name)
+      @nonpersistent = false
       @filename = name
+      prepare_filename_for_os!(@filename)
     end
 
-    def load_saved_library!(filename)
-      f = filename || "saved_libraries/library.json"
-      @filename = File.absolute_path(f)
+    def determine_filename!
+      @filename = File.absolute_path(@filename)
+      prepare_filename_for_os!(@filename)
+    end
 
-      if File.exist?(filename)
-        file = File.open(filename)
-        book_array = JSON.parse(file.read)
-        
-        @books = book_array.map { |d| UserBook.new(d) }
+    def get_raw_JSON_data
+      file = File.open(@filename)
+      JSON.parse(file.read)
+    end
+
+    def load_saved_library!
+      if File.exist?(@filename)
+        book_data_set = get_raw_JSON_data
+        book_data_set.each { |info| add(UserBook.new(info)) }
         raise ArgumentError unless books.all? { |b| valid?(b) }
       end
     end
