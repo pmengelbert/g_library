@@ -26,7 +26,7 @@ module CommandLineParse
 
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
-      library = opts.default_argv.include?("-l")
+      @library = library = opts.default_argv.include?("-l")
 
       opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
         o[:title] = t
@@ -61,6 +61,6 @@ module CommandLineParse
       end
 
     end.parse!
-    return [filename, o]
+    return [@filename = filename, o]
   end
 end
