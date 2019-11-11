@@ -5,6 +5,7 @@ require 'io/console'
 require_relative '../modules/api_query'
 require_relative '../modules/command_line_parse'
 require_relative '../modules/errors'
+require_relative '../modules/error_handler'
 require_relative '../modules/exec_helper'
 require_relative '../modules/google_api_url'
 require_relative '../modules/user_prompt'
@@ -16,6 +17,7 @@ require_relative '../lib/user_library'
 include ExecHelper
 include UserPrompt
 include CommandLineParse
+include ErrorHandler
 
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  File.join File.expand_path("..", CURRENT_DIR), "saved_libraries", "library.json"
@@ -29,41 +31,23 @@ command_line_parse!
 prepare_filename_for_os!
 
 if @options.nil?
-  begin
+
+  with_library_mode_error_handling do
+    (@library = UserLibrary.new(filename: @filename)).pretty_print
     library_mode_user_prompt
-  rescue UserQuits
-    @library.save
-    puts "\nEnjoy your day."
-    exit
   end
+
+else
+
+  with_search_mode_error_handling do
+    @persistent_library = UserLibrary.new(filename: @filename)
+    @temp_booklist = UserLibrary.new(nonpersistent: true)
+
+    search_results = perform_search
+    search_results.selected_results.each { |info| @temp_booklist.add(UserBook.new(info)) }
+    @temp_booklist.pretty_print
+
+    search_mode_user_prompt
+  end
+
 end
-
-persistent_library = UserLibrary.new(filename: @filename)
-
-temp_booklist = UserLibrary.new(nonpersistent: true)
-
-begin
-  search_results = perform_search
-  search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
-
-  temp_booklist.pretty_print
-
-  search_user_prompt(temp_booklist, persistent_library)
-
-rescue UserQuits
-  puts "\nThanks for browsing. Library file saved"
-  puts ""
-rescue Errno::EACCES
-  puts "\nYou don't have permission to write to the file you specified.  Quitting immediately"
-  puts ""
-rescue NoInternetError
-  puts "\nNo internet connection.  Please connect to the internet and try again."
-  puts ""
-rescue SearchError 
-  puts "\nThere was an error with your query; be careful to format it well"
-  puts ""
-rescue NoResults
-  puts "\nNo results."
-  puts ""
-end
-exit

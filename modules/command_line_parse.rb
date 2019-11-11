@@ -50,10 +50,9 @@ module CommandLineParse
         print_help_message(opts)
         exit
       end
-
-      @options[:search] = ARGV.join('+')
-
     end.parse!
+
+    @options[:search] = ARGV.join('+')
     
   end
 end

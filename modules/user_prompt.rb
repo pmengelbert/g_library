@@ -27,13 +27,13 @@ module UserPrompt
   end
 
   def library_mode_user_prompt
-    (@library = UserLibrary.new(filename: @filename)).pretty_print
     while true
       begin
         i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,
                @library )
 
         @library.delete(i)
+        @library.save
         @library.pretty_print
 
         puts "Your library now looks like this."
@@ -47,16 +47,15 @@ module UserPrompt
   end
 
 
-  def search_user_prompt(temp_booklist, persistent_library)
+  def search_mode_user_prompt
     while true
       begin
-
         i = prompt( "Enter a number (1-5) to add a book to your reading list (or q to quit): ",
-                /\A[1-5]|[qQ]\Z/, temp_booklist )
-        selected_book = temp_booklist[i]
+                /\A[1-5]|[qQ]\Z/, @temp_booklist )
+        selected_book = @temp_booklist[i]
 
-        persistent_library << selected_book
-        persistent_library.save
+        @persistent_library << selected_book
+        @persistent_library.save
 
         handle_successful_prompt_completion(selected_book)
         puts "Would you like to add another?"
