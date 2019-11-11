@@ -1,11 +1,5 @@
 require 'json'
 
-class Hash
-  def info
-    self
-  end
-end
-
 class UserBook
 
   attr_accessor :title, :publisher, :info, :id
@@ -13,10 +7,8 @@ class UserBook
   def initialize(book_data = {})
     raise ArgumentError unless book_data.is_a?(Hash)
 
-    #The main attributes of the book:
     @info = book_data
 
-    #The most commonly attributes, for ease of use
     @id = info['id'] || ""
     @title = info['title'] || ""
     @authors = info['authors'] || [] 
