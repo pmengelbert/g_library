@@ -61,6 +61,6 @@ module CommandLineParse
       end
 
     end.parse!
-    return [@filename = filename, o]
+    return [(@filename = filename), o]
   end
 end
