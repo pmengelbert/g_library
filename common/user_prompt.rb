@@ -9,8 +9,8 @@ module UserPrompt
   end
 
   def handle_successful_prompt_completion(selected_book)
-    puts "The book \"#{selected_book['title']}\" has been added to your reading list."
     puts ""
+    puts "The book \"#{selected_book['title']}\" has been added to your reading list."
   end
 
   def prompt(prompt, regexp, library)
@@ -59,12 +59,16 @@ module UserPrompt
 
         handle_successful_prompt_completion(selected_book)
         puts "Would you like to add another?"
+        puts ""
       rescue BookDuplicateError
         puts "\nThat book is already in your reading list.  Would you like to add another?"
+        puts ""
       rescue SelectionError
         puts "\nSorry, your selection was invalid.  Please try again."
+        puts ""
       rescue DataError
         puts "\nSorry, your selection was invalid.  Make sure your selection is within the range of available options."
+        puts ""
       end
     end
   end
