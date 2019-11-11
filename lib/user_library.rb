@@ -111,7 +111,7 @@ class UserLibrary
     def load_saved_library!
       if File.exist?(@filename)
         book_data_set = get_raw_JSON_data
-        book_data_set.each { |info| add(UserBook.new(info)) }
+        @books = book_data_set.map { |info| UserBook.new(info) }
         raise ArgumentError unless books.all? { |b| valid?(b) }
       end
     end
