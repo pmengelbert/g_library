@@ -5,9 +5,9 @@ require_relative '../lib/user_library'
 
 module CommandLineParse
   require 'optparse'
-  include ExecHelper
-  include UserPrompt
   include Errors
+  include UserPrompt
+  include ExecHelper
 
   def handle_nonexistent_file(filename, library)
     (puts "Library file not found, cannot display."; exit) if library

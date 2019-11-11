@@ -41,7 +41,11 @@ begin
   search_user_prompt(temp_booklist, persistent_library)
 
 rescue UserQuits
-  puts "\nThanks for browsing.  Nothing has been added to the reading list."
+  puts "\nThanks for browsing. Library file saved"
+  puts ""
+rescue Errno::EACCES
+  puts "\nYou don't have permission to write to the file you specified.  Quitting immediately"
+  puts ""
 rescue NoInternetError
   puts "\nNo internet connection.  Please connect to the internet and try again."
   puts ""
