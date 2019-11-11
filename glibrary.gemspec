@@ -15,7 +15,8 @@ Gem::Specification.new do |s|
         "modules/user_prompt.rb",
         "lib/book_search.rb",
         "lib/user_book.rb",
-        "lib/user_library.rb"
+        "lib/user_library.rb",
+        "saved_libraries/.gitkeep"
   ]
   s.require_paths = ["modules", "saved_libraries", "lib"]
   s.homepage    =
