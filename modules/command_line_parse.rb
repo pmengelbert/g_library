@@ -26,7 +26,7 @@ module CommandLineParse
 
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
-      @library = opts.default_argv.include?("-l")
+      library = opts.default_argv.include?("-l")
 
       opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
         o[:title] = t
@@ -43,7 +43,7 @@ module CommandLineParse
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
         filename = File.absolute_path(libfile)
-        handle_nonexistent_file(filename, @library) unless File.exist?(filename)
+        handle_nonexistent_file(filename, library) unless File.exist?(filename)
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
