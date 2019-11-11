@@ -24,7 +24,7 @@ process_args!
 
 options = {}
 filename = DEFAULT_FILENAME
-filename, options = CommandLineParse::command_line_parse!(filename, options)
+filename, options = command_line_parse!(filename, options)
 
 prepare_filename_for_os!(filename)
 
@@ -33,7 +33,7 @@ persistent_library = UserLibrary.new(filename: filename)
 temp_booklist = UserLibrary.new(nonpersistent: true)
 
 begin
-  search_results = ExecHelper::perform_search(options)
+  search_results = perform_search(options)
   search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
 
   temp_booklist.pretty_print
