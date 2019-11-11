@@ -7,17 +7,17 @@ Gem::Specification.new do |s|
   s.authors     = ["Peter Engelbert"]
   s.email       = 'pmengelbert@gmail.com'
   s.files       = [
-        "common/google_api_url.rb",
-        "common/exec_helper.rb",
-        "common/api_query.rb",
-        "common/user_prompt.rb",
-        "common/errors.rb",
-        "common/command_line_parse.rb",
-        "classes/book_search.rb",
-        "classes/user_book.rb",
-        "classes/user_library.rb"
+        "modules/api_query.rb",
+        "modules/command_line_parse.rb",
+        "modules/errors.rb",
+        "modules/exec_helper.rb",
+        "modules/google_api_url.rb",
+        "modules/user_prompt.rb",
+        "lib/book_search.rb",
+        "lib/user_book.rb",
+        "lib/user_library.rb"
   ]
-  s.require_paths = ["common", "saved_libraries", "classes"]
+  s.require_paths = ["modules", "saved_libraries", "lib"]
   s.homepage    =
     'https://github.com/pmengelbert/g_library'
   s.license       = 'MIT'
