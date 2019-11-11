@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'glibrary'
-  s.version     = '0.0.6'
+  s.version     = '0.0.7'
   s.date        = '2019-10-26'
   s.summary     = "glibrary"
   s.description = "A simple command line program that queries the Google Books API Query and lets you save a list of books you plan to read."
@@ -10,6 +10,7 @@ Gem::Specification.new do |s|
         "modules/api_query.rb",
         "modules/command_line_parse.rb",
         "modules/errors.rb",
+        "modules/error_handler.rb",
         "modules/exec_helper.rb",
         "modules/google_api_url.rb",
         "modules/user_prompt.rb",
