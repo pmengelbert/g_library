@@ -1,3 +1,1 @@
-Dir["#{__dir__}/*"].each do |fn|
-  require_relative fn
-end
+Dir[File.dirname(File.absolute_path(__FILE__)) + '/**/*_test.rb'].each {|file| require file }
