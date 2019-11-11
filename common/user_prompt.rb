@@ -17,9 +17,9 @@ module UserPrompt
     puts "The book \"#{selected_book['title']}\" has been added to your reading list."
   end
 
-  def prompt(prompt, regexp, library)
+  def prompt(prompt, regexp, library, suppress = nil)
     print prompt
-    s = STDIN.gets.strip
+    s = suppress || STDIN.gets.strip
     verify_selection(s, regexp)
     s = process_selection(s)
     raise NotABook unless s <= library.size
