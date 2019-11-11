@@ -18,13 +18,13 @@ include UserPrompt
 include CommandLineParse
 
 CURRENT_DIR = File.join(File.dirname(__FILE__))
-DEFAULT_FILENAME =  "../saved_libraries/library.json"
+DEFAULT_FILENAME =  File.join File.expand_path("..", CURRENT_DIR), "saved_libraries", "library.json"
 
 process_args!
 
 options = {}
-@filename = File.join(CURRENT_DIR, DEFAULT_FILENAME)
-@filename, options = CommandLineParse::command_line_parse!(@filename, options)
+filename = DEFAULT_FILENAME
+filename, options = CommandLineParse::command_line_parse!(filename, options)
 
 prepare_filename_for_os!
 

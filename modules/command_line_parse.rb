@@ -42,14 +42,14 @@ module CommandLineParse
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        @filename = File.absolute_path(libfile)
-        handle_nonexistent_file(@filename, @library) unless File.exist?(@filename)
+        filename = File.absolute_path(libfile)
+        handle_nonexistent_file(filename, @library) unless File.exist?(filename)
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
-        prepare_filename_for_os!
+        prepare_filename_for_os!(filename)
         unless suppress
-          (l = UserLibrary.new(filename: @filename)).pretty_print
+          (l = UserLibrary.new(filename: filename)).pretty_print
           library_mode_user_prompt(l) 
           exit
         end
@@ -61,6 +61,6 @@ module CommandLineParse
       end
 
     end.parse!
-    return [@filename, o]
+    return [filename, o]
   end
 end
