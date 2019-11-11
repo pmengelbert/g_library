@@ -22,23 +22,28 @@ DEFAULT_FILENAME =  File.join File.expand_path("..", CURRENT_DIR), "saved_librar
 
 process_args!
 
-options = {}
-filename = DEFAULT_FILENAME
-filename, options = command_line_parse!(filename, options)
+@options = {}
+@filename = DEFAULT_FILENAME
+command_line_parse!
 
-prepare_filename_for_os!(filename)
+prepare_filename_for_os!
 
-if options.nil?
-  @filename = filename
-  library_mode_user_prompt
+if @options.nil?
+  begin
+    library_mode_user_prompt
+  rescue UserQuits
+    @library.save
+    puts "\nEnjoy your day."
+    exit
+  end
 end
 
-persistent_library = UserLibrary.new(filename: filename)
+persistent_library = UserLibrary.new(filename: @filename)
 
 temp_booklist = UserLibrary.new(nonpersistent: true)
 
 begin
-  search_results = perform_search(options)
+  search_results = perform_search
   search_results.selected_results.each { |info| temp_booklist.add(UserBook.new(info)) }
 
   temp_booklist.pretty_print

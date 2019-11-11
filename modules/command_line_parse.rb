@@ -7,8 +7,8 @@ module CommandLineParse
   require 'optparse'
   include Errors
 
-  def handle_nonexistent_file(filename, library)
-    (puts "Library file not found, cannot display."; exit) if library
+  def handle_nonexistent_file
+    (puts "Library file not found, cannot display."; exit)
     puts "Creating new file"
   end
 
@@ -19,33 +19,31 @@ module CommandLineParse
     puts ""
   end
 
-
-  def command_line_parse!(filename, o, suppress = nil)
-
+  def command_line_parse!
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
-      @library = library = opts.default_argv.include?("-l")
 
       opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
-        o[:title] = t
+        @options[:title] = t
       end
 
       opts.on("-a", "--author=AUTHOR", "Specify an author keyword") do |a|
-        o[:author] = a
+        @options[:author] = a
       end
 
       opts.on("-p", "--publisher=PUBLISHER", "Specify a publisher keyword") do |p|
-        o[:publisher] = p
+        @options[:publisher] = p
       end
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        filename = File.absolute_path(libfile)
-        handle_nonexistent_file(filename, library) unless File.exist?(filename)
+        @filename = File.absolute_path(libfile)
+        handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
       end
 
       opts.on("-l", "--library", "See your library; ignores all search options") do
-        return [filename, nil]
+        @options = nil
+        return
       end
 
       opts.on("-h", "--help", "Prints this help") do
@@ -53,7 +51,9 @@ module CommandLineParse
         exit
       end
 
+      @options[:search] = ARGV.join('+')
+
     end.parse!
-    return [(@filename = filename), o]
+    
   end
 end

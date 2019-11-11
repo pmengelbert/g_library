@@ -10,6 +10,7 @@ class CommandLineParseTest < Test::Unit::TestCase
     ARGV.each_index do |i|
       ARGV.delete_at(i)
     end
+    @options = {}
     
   end
 
@@ -18,39 +19,39 @@ class CommandLineParseTest < Test::Unit::TestCase
   def test_command_line_parse_search_mode_no_flags
     ARGV << "harry" 
     ARGV << "potter"
-    _, _ = command_line_parse!("/tmp/test.json", {}, true)
-    assert ARGV == ["harry", "potter"]
+    command_line_parse!
+    assert @options.size > 0
   end
 
   def test_command_line_parse_search_mode_with_flags
     %w[-t potter -a rowling -p blablabla].each do |s|
       ARGV << s
     end
-    _, o = command_line_parse!("/tmp/test.json", {}, true)
-    assert o[:title] == "potter" &&
-      o[:author] == "rowling" &&
-      o[:publisher] == "blablabla"
+    command_line_parse!
+    assert @options[:title] == "potter" &&
+      @options[:author] == "rowling" &&
+      @options[:publisher] == "blablabla"
   end
 
   def test_command_line_parse_search_mode_with_alternative_flags
     %w[--title potter --author rowling --publisher blablabla].each do |s|
       ARGV << s
     end
-    _, o = command_line_parse!("/tmp/test.json", {}, true)
-    assert o[:title] == "potter" &&
-      o[:author] == "rowling" &&
-      o[:publisher] == "blablabla"
+    command_line_parse!
+    assert @options[:title] == "potter" &&
+      @options[:author] == "rowling" &&
+      @options[:publisher] == "blablabla"
   end
 
   def test_command_line_parse_library_mode
     %w[-t hello -f /tmp/test.json -l].each { |s| ARGV << s }
-    _, _ = command_line_parse!("/tmp/test.json", {}, true)
-    assert @library
+    command_line_parse!
+    assert @options.nil?
   end
 
   def test_command_line_parse_filename_caught
     %w[-t hello -f /tmp/test.json -l].each { |s| ARGV << s }
-    _, _ = command_line_parse!("/tmp/test.json", {}, true)
+    command_line_parse!
     assert_equal @filename, "/tmp/test.json"
   end
 

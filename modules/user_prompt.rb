@@ -27,14 +27,14 @@ module UserPrompt
   end
 
   def library_mode_user_prompt
-    (library = UserLibrary.new(filename: @filename)).pretty_print
+    (@library = UserLibrary.new(filename: @filename)).pretty_print
     while true
       begin
         i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,
-               library )
+               @library )
 
-        library.delete(i)
-        library.pretty_print
+        @library.delete(i)
+        @library.pretty_print
 
         puts "Your library now looks like this."
         puts ""
@@ -42,10 +42,6 @@ module UserPrompt
         puts "\nSorry, your selection was invalid. Please try again."
       rescue NotABook
         puts "\nSorry, your selection was invalid. Make sure your selection is in the provided range."
-      rescue UserQuits
-        library.save
-        puts "\nEnjoy your day."
-        exit
       end
     end
   end

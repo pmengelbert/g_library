@@ -14,20 +14,22 @@ class TestExecHelper < Test::Unit::TestCase
   end
 
   def test_method_prepare_filename_for_os!
-    s = "/home/pme/"
+    @filename = "/home/pme/"
     ENV["test"] = "C:\\Windows"
-    prepare_filename_for_os!(s)
+    prepare_filename_for_os!
     ENV.delete("test")
-    assert s=~ /\\/
+    assert @filename =~ /\\/
   end
 
   #assumes internet connection
   def test_perform_search_with_successful_search
-    assert !perform_search(search: "harry potter", title: "azkaban", author: "rowling").nil?
+    @options = { search: "harry potter", title: "azkaban", author: "rowling" }
+    assert !perform_search.nil?
   end
 
   def test_perform_search_with_bad_search
-    assert_raise( NoResults ) { perform_search(search: "2039iodwioujoi\\erw4093") }
+    @options = { search: "2039iodwioujoi\\erw4093" }
+    assert_raise( NoResults ) { perform_search }
   end
 
 end
