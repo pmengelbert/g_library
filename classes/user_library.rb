@@ -18,7 +18,7 @@ class UserLibrary
   end
 
   def add(book)
-    (raise DataError; return) unless valid?(book)
+    (raise NotABook; return) unless valid?(book)
     raise BookDuplicateError if any? { |b| b['id'] == book['id'] }
     @books << book
   end

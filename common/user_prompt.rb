@@ -18,7 +18,7 @@ module UserPrompt
     s = STDIN.gets.strip
     verify_selection(s, regexp)
     s = process_selection(s)
-    raise DataError unless s <= library.size
+    raise NotABook unless s <= library.size
     return s
   end
 
@@ -35,7 +35,7 @@ module UserPrompt
         puts ""
       rescue SelectionError
         puts "\nSorry, your selection was invalid. Please try again."
-      rescue DataError
+      rescue NotABook
         puts "\nSorry, your selection was invalid. Make sure your selection is in the provided range."
       rescue UserQuits
         library.save
@@ -66,7 +66,7 @@ module UserPrompt
       rescue SelectionError
         puts "\nSorry, your selection was invalid.  Please try again."
         puts ""
-      rescue DataError
+      rescue NotABook
         puts "\nSorry, your selection was invalid.  Make sure your selection is within the range of available options."
         puts ""
       end

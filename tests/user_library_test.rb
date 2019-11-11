@@ -14,7 +14,7 @@ class UserLibraryTest < Test::Unit::TestCase
 
   def test_delete_method
     ul = UserLibrary.new(nonpersistent: true)
-    ul.add({})
+    ul.add(UserBook.new({}))
     assert ul.to_a.size == 1
     ul.delete(0)
     assert ul.to_a.size == 0
@@ -26,7 +26,7 @@ class UserLibraryTest < Test::Unit::TestCase
   end
 
   def test_for_invalid_books
-    assert_raise("Invalid Data") { @l.add("string") }
+    assert_raise(NotABook) { @l.add("string") }
   end
 
   def test_error_if_save_location_is_without_permission

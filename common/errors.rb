@@ -13,7 +13,7 @@ end
 class SelectionError < StandardError
 end
 
-class DataError < StandardError
+class NotABook < StandardError
 end
 
 class UserQuits < StandardError
