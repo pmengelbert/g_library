@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'pmengelbert@gmail.com'
   s.files       = [
         "modules/api_query.rb",
+        "modules/file_helper.rb",
         "exec_helpers/command_line_parse.rb",
         "globals/errors.rb",
         "exec_helpers/error_handler.rb",
