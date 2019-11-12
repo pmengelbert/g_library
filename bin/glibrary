@@ -14,9 +14,6 @@ require_relative '../lib/book_search'
 require_relative '../lib/user_book'
 require_relative '../lib/user_library'
 
-include ExecHelper
-include ErrorHandler
-
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 
 DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR), 

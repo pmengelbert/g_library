@@ -1,0 +1,185 @@
+[
+  {
+    "title": "The Magical Worlds of Harry Potter",
+    "subtitle": "A Treasury of Myths, Legends, and Fascinating Facts",
+    "authors": [
+      "David Colbert"
+    ],
+    "publisher": "Penguin",
+    "publishedDate": "2008",
+    "description": "Explores the sources and meanings of aspects of the literary world of Harry Potter within myths, legends, and history.",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_10",
+        "identifier": "0425223183"
+      },
+      {
+        "type": "ISBN_13",
+        "identifier": "9780425223185"
+      }
+    ],
+    "readingModes": {
+      "text": false,
+      "image": false
+    },
+    "pageCount": 335,
+    "printType": "BOOK",
+    "categories": [
+      "Literary Criticism"
+    ],
+    "averageRating": 4.0,
+    "ratingsCount": 10,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "1.0.0.0.preview.0",
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/content?id=Oe3aH0YVI1IC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=Oe3aH0YVI1IC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=Oe3aH0YVI1IC&printsec=frontcover&dq=harry+potter&hl=&cd=2&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=Oe3aH0YVI1IC&dq=harry+potter&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/The_Magical_Worlds_of_Harry_Potter.html?hl=&id=Oe3aH0YVI1IC",
+    "id": "Oe3aH0YVI1IC"
+  },
+  {
+    "title": "Harry Potter and the Cursed Child",
+    "subtitle": "Parts one and two",
+    "authors": [
+      "Jack Thorne",
+      "J. K. Rowling",
+      "John Tiffany"
+    ],
+    "publisher": "THORNDIKE Press",
+    "publishedDate": "2016",
+    "description": "\"Thorndike Press large print the literacy bridge.\"",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_10",
+        "identifier": "1410496201"
+      },
+      {
+        "type": "ISBN_13",
+        "identifier": "9781410496201"
+      }
+    ],
+    "readingModes": {
+      "text": false,
+      "image": false
+    },
+    "pageCount": 407,
+    "printType": "BOOK",
+    "categories": [
+      "Good and evil"
+    ],
+    "averageRating": 5.0,
+    "ratingsCount": 1,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "panelizationSummary": {
+      "containsEpubBubbles": false,
+      "containsImageBubbles": false
+    },
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/content?id=cvRFvgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=cvRFvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=cvRFvgAACAAJ&dq=harry+potter&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=cvRFvgAACAAJ&dq=harry+potter&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_and_the_Cursed_Child.html?hl=&id=cvRFvgAACAAJ",
+    "id": "cvRFvgAACAAJ"
+  },
+  {
+    "title": "The Classical Style",
+    "subtitle": "Haydn, Mozart, Beethoven",
+    "authors": [
+      "Charles Rosen"
+    ],
+    "publisher": "W. W. Norton & Company",
+    "publishedDate": "1997",
+    "description": "Presents a detailed analysis of the musical styles and forms developed by Mozart, Haydn, and Beethoven",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_10",
+        "identifier": "0393317129"
+      },
+      {
+        "type": "ISBN_13",
+        "identifier": "9780393317121"
+      }
+    ],
+    "readingModes": {
+      "text": false,
+      "image": false
+    },
+    "pageCount": 533,
+    "printType": "BOOK",
+    "categories": [
+      "Music"
+    ],
+    "averageRating": 5.0,
+    "ratingsCount": 2,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "1.0.1.0.preview.0",
+    "panelizationSummary": {
+      "containsEpubBubbles": false,
+      "containsImageBubbles": false
+    },
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/content?id=vGdcINvz9n4C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=vGdcINvz9n4C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=vGdcINvz9n4C&printsec=frontcover&dq=charles+rosen&hl=&cd=1&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=vGdcINvz9n4C&dq=charles+rosen&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/The_Classical_Style.html?hl=&id=vGdcINvz9n4C",
+    "id": "vGdcINvz9n4C"
+  },
+  {
+    "title": "Sonata Forms",
+    "authors": [
+      "Charles Rosen"
+    ],
+    "publisher": "W. W. Norton & Company",
+    "publishedDate": "1988",
+    "description": "\"Nobody writes better about music .... again and again, unerring insight into just the features that make the music special and fine.\" The New York Review of Books\"",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_10",
+        "identifier": "0393302199"
+      },
+      {
+        "type": "ISBN_13",
+        "identifier": "9780393302196"
+      }
+    ],
+    "readingModes": {
+      "text": false,
+      "image": false
+    },
+    "pageCount": 415,
+    "printType": "BOOK",
+    "categories": [
+      "Music"
+    ],
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": false,
+    "contentVersion": "preview-1.0.0",
+    "panelizationSummary": {
+      "containsEpubBubbles": false,
+      "containsImageBubbles": false
+    },
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/content?id=IhRW2bM6nnYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/content?id=IhRW2bM6nnYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.com/books?id=IhRW2bM6nnYC&printsec=frontcover&dq=charles+rosen&hl=&cd=5&source=gbs_api",
+    "infoLink": "http://books.google.com/books?id=IhRW2bM6nnYC&dq=charles+rosen&hl=&source=gbs_api",
+    "canonicalVolumeLink": "https://books.google.com/books/about/Sonata_Forms.html?hl=&id=IhRW2bM6nnYC",
+    "id": "IhRW2bM6nnYC"
+  }
+]

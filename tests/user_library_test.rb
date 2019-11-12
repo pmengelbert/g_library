@@ -5,7 +5,7 @@ require_relative '../lib/book_search.rb'
 require_relative '../lib/user_library.rb'
 
 class UserLibraryTest < Test::Unit::TestCase
-  include ExecHelper
+  
   
 
   SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")

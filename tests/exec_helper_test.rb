@@ -4,7 +4,7 @@ require_relative '../modules/errors'
 require_relative '../lib/book_search.rb'
 
 class TestExecHelper < Test::Unit::TestCase
-  include ExecHelper
+  
   
 
   def test_process_args_method

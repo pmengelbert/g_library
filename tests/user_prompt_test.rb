@@ -5,8 +5,6 @@ require_relative '../lib/user_library'
 require_relative '../lib/book_search'
 
 class TestUserPrompt < Test::Unit::TestCase
-  
-  
 
   def setup
     @smr = /\A[1-5]|[qQ]\Z/

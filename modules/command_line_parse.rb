@@ -32,7 +32,7 @@ def get_cli_options
 
     opts.on("-f", "--lib-file=LIBFILE",
             "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-      abort_library_mode if ARGV.include?("-l") && !File.exist?(filename)
+      abort_library_mode if ARGV.include?("-l") && !File.exist?(libfile)
       options[:filename] = libfile
     end
 
