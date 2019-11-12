@@ -1,5 +1,4 @@
 require 'optparse'
-require_relative 'file_helper'
 
 def abort_library_mode
   puts "Library file not found, cannot display."
