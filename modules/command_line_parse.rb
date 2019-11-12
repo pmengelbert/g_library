@@ -38,7 +38,7 @@ module CommandLineParse
         handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
       end
 
-      opts.on("-l", "--library", "See your library; ignores all search options") do
+      opts.on("-l", "--library", "See your reading list; ignores all search options") do
         @options = nil
         return
       end
