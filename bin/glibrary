@@ -32,8 +32,8 @@ library_mode = options.nil? #options will be nil if library mode selected
 if library_mode
 
   with_library_mode_error_handling do
-    (@library = UserLibrary.new(filename: @filename)).pretty_print
-    library_mode_user_prompt
+    user_library = UserLibrary.new(filename: filename)
+    library_mode_user_prompt(user_library)
   end
 
 else

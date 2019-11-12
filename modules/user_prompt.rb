@@ -26,15 +26,16 @@ module UserPrompt
     return s
   end
 
-  def library_mode_user_prompt
+  def library_mode_user_prompt(lib)
     while true
       begin
-        i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,
-               @library )
+        lib.pretty_print
 
-        @library.delete(i)
-        @library.save
-        @library.pretty_print
+        i = prompt( "Select a book number to delete, or type \"q\" to quit: ", /\A([0-9]+|[qQ])\Z/,
+               lib)
+
+        lib.delete(i)
+        lib.save
 
         puts "Your library now looks like this."
         puts ""
