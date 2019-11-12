@@ -4,7 +4,7 @@ require_relative '../modules/command_line_parse'
 
 class CommandLineParseTest < Test::Unit::TestCase
   
-  include Errors
+  
 
   def setup
     ARGV.each_index do |i|
@@ -41,6 +41,14 @@ class CommandLineParseTest < Test::Unit::TestCase
     assert options[:title] == "potter" &&
       options[:author] == "rowling" &&
       options[:publisher] == "blablabla"
+  end
+
+  def test_command_line_parse_catches_filename
+    %w[-t hello].each { |s| ARGV << s }
+    ARGV << "-f"
+    ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
+    options = get_cli_options
+    assert /.*tmp\.json/ =~ options[:filename]
   end
 
   def test_command_line_parse_library_mode

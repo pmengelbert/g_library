@@ -2,7 +2,7 @@ require 'json'
 require_relative '../modules/errors'
 
 class UserBook
-  include Errors
+  
 
   attr_accessor :title, :publisher, :info, :id
 

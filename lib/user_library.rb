@@ -6,7 +6,7 @@ require_relative 'user_book'
 
 class UserLibrary
   include Enumerable
-  include Errors
+  
 
   attr_reader :books, :filename
 

@@ -5,7 +5,7 @@ require_relative '../lib/book_search.rb'
 
 class TestExecHelper < Test::Unit::TestCase
   include ExecHelper
-  include Errors
+  
 
   def test_process_args_method
     args = %w[harry potter -l -f /tmp/library.json]

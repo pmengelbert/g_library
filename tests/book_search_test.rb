@@ -3,7 +3,7 @@ require_relative '../modules/errors'
 require_relative '../lib/book_search.rb'
 
 class TestBookSearch < Test::Unit::TestCase
-  include Errors
+  
 
   SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
 

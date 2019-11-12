@@ -4,7 +4,7 @@ require_relative '../modules/errors'
 
 class TestFileHelper < Test::Unit::TestCase
   
-  include Errors
+  
 
   def test_method_prepare
     filename = "/home/pme/"
