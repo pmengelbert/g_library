@@ -47,7 +47,7 @@ class UserLibraryTest < Test::Unit::TestCase
     filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
     File.write(filename, "908ygu08ygyuiu-9u0hi////{}{}{}:")
     assert_raise(JSON::ParserError) do
-      @l.send(:set_filename, "/tmp/test.json") 
+      @l.send(:set_filename, filename) 
       @l.send(:get_raw_JSON_data)
     end
   end
