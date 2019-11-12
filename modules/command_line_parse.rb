@@ -18,12 +18,12 @@ module CommandLineParse
 
 
 
-  def process_filename!
+  def process_filename!(libfile)
     @filename = File.absolute_path(libfile)
     handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
   end
 
-  def command_line_parse!
+  def get_cli_options
     options = {}
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
@@ -42,7 +42,7 @@ module CommandLineParse
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        process_filename!
+        process_filename!(libfile)
       end
 
       opts.on("-l", "--library", "See your reading list; ignores all search options") do

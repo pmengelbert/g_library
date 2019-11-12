@@ -26,7 +26,7 @@ DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR),
 process_args!
 
 @filename = DEFAULT_FILENAME
-options = command_line_parse!
+options = get_cli_options
 
 prepare_filename_for_os!
 

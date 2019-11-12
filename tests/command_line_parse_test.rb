@@ -14,20 +14,20 @@ class CommandLineParseTest < Test::Unit::TestCase
     
   end
 
-    #_, _ = command_line_parse!("/tmp/test.json", {})
+    #_, _ = get_cli_options("/tmp/test.json", {})
 
   def test_command_line_parse_search_mode_no_flags
     ARGV << "harry" 
     ARGV << "potter"
-    command_line_parse!
-    assert @options.size > 0
+    options = get_cli_options
+    assert options.size > 0
   end
 
   def test_command_line_parse_search_mode_with_flags
     %w[-t potter -a rowling -p blablabla].each do |s|
       ARGV << s
     end
-    options = command_line_parse!
+    options = get_cli_options
     assert options[:title] == "potter" &&
       options[:author] == "rowling" &&
       options[:publisher] == "blablabla"
@@ -37,7 +37,7 @@ class CommandLineParseTest < Test::Unit::TestCase
     %w[--title potter --author rowling --publisher blablabla].each do |s|
       ARGV << s
     end
-    options = command_line_parse!
+    options = get_cli_options
     assert options[:title] == "potter" &&
       options[:author] == "rowling" &&
       options[:publisher] == "blablabla"
@@ -47,15 +47,15 @@ class CommandLineParseTest < Test::Unit::TestCase
     %w[-t hello -l].each { |s| ARGV << s }
     ARGV << "-f"
     ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
-    command_line_parse!
-    assert @options.nil?
+    options = get_cli_options
+    assert options.nil?
   end
 
   def test_command_line_parse_filename_caught
     %w[-t hello].each { |s| ARGV << s }
     ARGV << "-f"
     ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
-    command_line_parse!
+    get_cli_options
     puts @filename
     assert @filename =~ /.*tmp\.json\Z/
   end
