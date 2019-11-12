@@ -42,8 +42,8 @@ else
     @persistent_library = UserLibrary.new(filename: @filename)
     @temp_booklist = UserLibrary.new(nonpersistent: true)
 
-    search_results = perform_search
-    search_results.selected_results.each { |info| @temp_booklist.add(UserBook.new(info)) }
+    search_results = BookSearch.new(options)
+    search_results.selected.each { |info| @temp_booklist.add(UserBook.new(info)) }
     @temp_booklist.pretty_print
 
     search_mode_user_prompt

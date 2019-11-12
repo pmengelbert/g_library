@@ -13,15 +13,4 @@ class TestExecHelper < Test::Unit::TestCase
     assert args[-1] == "-l"
   end
 
-  #assumes internet connection
-  def test_perform_search_with_successful_search
-    @options = { search: "harry potter", title: "azkaban", author: "rowling" }
-    assert !perform_search.nil?
-  end
-
-  def test_perform_search_with_bad_search
-    @options = { search: "2039iodwioujoi\\erw4093" }
-    assert_raise( NoResults ) { perform_search }
-  end
-
 end
