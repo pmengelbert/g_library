@@ -42,7 +42,10 @@ class UserLibraryTest < Test::Unit::TestCase
   end
 
   def test_for_invalid_JSON_data
-    File.write("/tmp/test.json", "908ygu08ygyuiu-9u0hi////{}{}{}:")
+    file = File.join File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json"
+    filename = File.absolute_path(file)
+    filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
+    File.write(filename, "908ygu08ygyuiu-9u0hi////{}{}{}:")
     assert_raise(JSON::ParserError) do
       @l.send(:set_filename, "/tmp/test.json") 
       @l.send(:get_raw_JSON_data)
@@ -64,12 +67,6 @@ class UserLibraryTest < Test::Unit::TestCase
     @l.send(:set_filename, File.absolute_path(file))
     @l.save
     assert_nothing_raised(Exception) { File.open(@l.filename) }
-  end
-
-  Test::Unit.at_exit do
-    file = File.join File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json"
-    filename = File.absolute_path(file)
-    filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
   end
 
 end
