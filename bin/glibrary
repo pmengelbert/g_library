@@ -26,11 +26,11 @@ process_args!
 
 @options = {}
 @filename = DEFAULT_FILENAME
-command_line_parse!
+command_line_parse! #this function processes @filename and fills the @options hash.
 
 prepare_filename_for_os!
 
-if @options.nil?
+if library_mode?
 
   with_library_mode_error_handling do
     (@library = UserLibrary.new(filename: @filename)).pretty_print

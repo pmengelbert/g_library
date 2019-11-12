@@ -8,6 +8,10 @@ module ExecHelper
     args << args.delete("-l") if args.include?("-l")
   end
 
+  def library_mode?
+    @options.nil?
+  end
+
   def prepare_filename_for_os!
     @filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
   end
