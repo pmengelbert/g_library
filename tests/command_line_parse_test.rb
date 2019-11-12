@@ -44,15 +44,20 @@ class CommandLineParseTest < Test::Unit::TestCase
   end
 
   def test_command_line_parse_library_mode
-    %w[-t hello -f /tmp/test.json -l].each { |s| ARGV << s }
+    %w[-t hello -l].each { |s| ARGV << s }
+    ARGV << "-f"
+    ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
     command_line_parse!
     assert @options.nil?
   end
 
   def test_command_line_parse_filename_caught
-    %w[-t hello -f /tmp/test.json -l].each { |s| ARGV << s }
+    %w[-t hello].each { |s| ARGV << s }
+    ARGV << "-f"
+    ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
     command_line_parse!
-    assert_equal @filename, "/tmp/test.json"
+    puts @filename
+    assert @filename =~ /.*tmp\.json\Z/
   end
 
 end

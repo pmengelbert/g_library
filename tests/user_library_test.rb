@@ -57,7 +57,8 @@ class UserLibraryTest < Test::Unit::TestCase
   end
 
   def test_error_if_save_location_is_without_permission
-    @l.send(:set_filename, "/library.json")
+    root = ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i } ? "C:\\" : "/"
+    @l.send(:set_filename, "#{root}library.json")
     assert_raise(Errno::EACCES) { @l.save }
   end
 

@@ -1,7 +1,4 @@
-require_relative 'exec_helper'
-require_relative 'user_prompt'
 require_relative 'errors'
-require_relative '../lib/user_library'
 
 module CommandLineParse
   require 'optparse'
@@ -52,7 +49,7 @@ module CommandLineParse
       end
     end.parse!
 
-    @options[:search] = ARGV.join('+')
+   @options[:search] = ARGV.join('+')
     
   end
 end
