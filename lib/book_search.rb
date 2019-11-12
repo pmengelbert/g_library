@@ -45,46 +45,46 @@ class BookSearch
   end
 
   private 
-  class << self
-    def make_url_arg_list(args)
-      url = ["?q="]
+    class << self
+      def make_url_arg_list(args)
+        url = ["?q="]
 
-      q = args.delete('search')
-      url << q.to_s
+        q = args.delete('search')
+        url << q.to_s
 
-      url << args.map do |k,v|
-        k = ("in" + k) if %w[title author publisher].include?(k)
-        "%s:%s" % [k, v] 
+        url << args.map do |k,v|
+          k = ("in" + k) if %w[title author publisher].include?(k)
+          "%s:%s" % [k, v] 
+        end
+
+        url.reject!(&:empty?)
+        url[0] + url[1, url.length-1].join("+")
       end
 
-      url.reject!(&:empty?)
-      url[0] + url[1, url.length-1].join("+")
-    end
-
-    def format_args(args)
-      result = args.map { |k, v| [k,v].map(&:to_s) }.to_h
-      result.reject! { |k, v| v.empty? }
-      return result.to_h
-    end
-
-    def searchable_arguments?(args)
-      args.keys.any? do |k| 
-        %i[search title author publisher subject isbn lccn oclc].include?(k)
+      def format_args(args)
+        result = args.map { |k, v| [k,v].map(&:to_s) }.to_h
+        result.reject! { |k, v| v.empty? }
+        return result.to_h
       end
-    end
+
+      def searchable_arguments?(args)
+        args.keys.any? do |k| 
+          %i[search title author publisher subject isbn lccn oclc].include?(k)
+        end
+      end
 
 
-    def format_hash(hash)
-      hash['volumeInfo'].merge( { 'id' => hash['id'] } )
-    end
+      def format_hash(hash)
+        hash['volumeInfo'].merge( { 'id' => hash['id'] } )
+      end
 
-    def make_url(args)
-      (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
-    end
+      def make_url(args)
+        (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
+      end
 
-    def args
-      @args
-    end
+      def args
+        @args
+      end
   end
 
 end
