@@ -70,7 +70,6 @@ class UserLibraryTest < Test::Unit::TestCase
     file = File.join File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json"
     filename = File.absolute_path(file)
     filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
-    File.delete(filename) if File.exist?(filename)
   end
 
 end
