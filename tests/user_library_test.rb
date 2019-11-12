@@ -1,9 +1,11 @@
 require 'test/unit'
 
+require_relative '../modules/exec_helper.rb'
 require_relative '../lib/book_search.rb'
 require_relative '../lib/user_library.rb'
 
 class UserLibraryTest < Test::Unit::TestCase
+  include ExecHelper
   include Errors
 
   SEARCH_RESULTS = BookSearch.new(search: "harry", title: "harry potter", author: "rowling")
@@ -57,14 +59,18 @@ class UserLibraryTest < Test::Unit::TestCase
   end
 
   def test_for_successful_file_save
-    @l.send(:set_filename, "/tmp/test.json")
+    file = File.join File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json"
+    file.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
+    @l.send(:set_filename, File.absolute_path(file))
     @l.save
     assert_nothing_raised(Exception) { File.open(@l.filename) }
   end
 
   Test::Unit.at_exit do
-    filename = "/tmp/library.json"
-    system("rm #{filename}") if File.exist?(filename)
+    file = File.join File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json"
+    filename = File.absolute_path(file)
+    filename.gsub!(/\//, '\\') if ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i }
+    File.delete(filename) if File.exist?(filename)
   end
 
 end
