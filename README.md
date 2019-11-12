@@ -2,7 +2,7 @@
 
 glibrary is a simple and effective command-line book search application.  It uses the Google Books API to find books by name, author, publisher, or keyword.  Search results can be selected and stored locally in a 'reading list' for easy reference. glibrary runs anywhere you have the ruby interpreter installed; it has been tested on Linux, MacOS, and Windows.
 
-A rudimentary web version of this application can be found [Here](http://3.130.246.225:3001).
+A rudimentary web version of this application can be found [here](https://fast-citadel-62885.herokuapp.com/users/1).
 
 # Getting Started
 
