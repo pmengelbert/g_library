@@ -30,7 +30,7 @@ glibrary will work best when installed as a gem.  At the command-line, type the 
 ```
 % gem install glibrary
 ```
-You may need administrator privileges to install gems.  Usually you won't, but in testing on Windows I found that administrator privileges were necessary.
+You may need administrator privileges to install gems.  Usually you won't, but in testing on Windows I found that administrator privileges were sometimes necessary.
 
 ## Cloning the repo
 ```
@@ -53,7 +53,7 @@ glibrary comes with two main 'modes': Search mode and List mode.  For more infor
 
 You will see output like this:
 ```
-Usage: ruby g_library.rb [options...] [query]
+Usage: glibrary [options...] [query]
     -t, --title=TITLE                Specify a title keyword
     -a, --author=AUTHOR              Specify an author keyword
     -p, --publisher=PUBLISHER        Specify a publisher keyword
@@ -61,6 +61,7 @@ Usage: ruby g_library.rb [options...] [query]
     -l, --library                    See your library; ignores all search options
     -h, --help                       Prints this help
 [query]: all other arguments will be treated as general search keywords
+
 ```
 
 ## Search mode
@@ -76,34 +77,32 @@ In this situation, glibrary will query the Google Books database for books from 
 ### Saving books to your reading list
 You will then be asked if you want to save one of the five results to your reading list:  
 ```
-% glibrary -p "signet" -a "dickens" great expectations
-
------Match 1-----
+1.)--w_QxbUaiJPMC-----
 Title: Great Expectations
 Author: Charles Dickens
 Publisher: Signet
 
------Match 2-----
+2.)--bYGM0MbO3ZkC-----
 Title: Bleak House
 Author: Charles Dickens
 Publisher: Univ. Press of Mississippi
 
------Match 3-----
-Title: Oliver Twist, Or, the Parish Boy's Progress
+3.)--vkFO5b2mMYIC-----
+Title: Oliver Twist
 Author: Charles Dickens
 Publisher: Signet
 
------Match 4-----
+4.)--tV4Kh6qMU24C-----
 Title: The Pickwick Papers
 Author: Charles Dickens
 Publisher: Univ. Press of Mississippi
 
------Match 5-----
+5.)--T7dSvwEACAAJ-----
 Title: A Christmas Carol
 Author: Charles Dickens
 Publisher: 
 
-Pick a book to add to your library (or 0 to quit): 
+Enter a number (1-5) to add a book to your reading list (or q to quit): 
 ```
 
 Pick a number, and it will be saved.  You can view your reading list in List mode (see below)
@@ -115,32 +114,34 @@ If you want to save to a library file other than the default, call glibrary with
 ```
 
 ## List mode
-Whenever the "-l" flag is used, glibrary enters List mode, and will not search.  List mode shows your saved 'reading list', which is populated in search mode.
+Whenever the "-l" flag is used, glibrary enters List mode, and will not search.  List mode shows your saved 'reading list', which is populated in search mode.  In List mode, you will be prompted to delete any books that you no longer want to keep in your list.
 ```
-------SYiAAAAQBAJ-----
-Title: The Logic Book
-Author: Merrie Bergmann, James Moor, Jack Nelson
-Publisher: McGraw-Hill Higher Education
-
------1g8ENH5ox8oC-----
-Title: The Issue at Hand
-Author: Gil Fronsdal
-Publisher: Insight Meditation Center
-
------OfgVAAAAQBAJ-----
+1.)--OfgVAAAAQBAJ-----
 Title: A Practical Approach to 18th Century Counterpoint
 Author: Robert Gauldin
 Publisher: Waveland Press
 
------UPAYAAAAYAAJ-----
-Title: Treasure Island
-Author: Robert Louis Stevenson
-Publisher: 
+2.)--z1k_AxXUvmEC-----
+Title: The Brothers Karamazov
+Author: Fyodor Dostoevsky
+Publisher: Macmillan
 
------1CNujxYPEpUC-----
-Title: Home
-Author: Toni Morrison
-Publisher: Vintage
+3.)--PBYjpKypCskC-----
+Title: Classical Form
+Author: William E. Caplin
+Publisher: Oxford University Press
+
+4.)--VXH3pnqDARoC-----
+Title: The Study of Fugue
+Author: Alfred Mann
+Publisher: Courier Corporation
+
+5.)---SYiAAAAQBAJ-----
+Title: The Logic Book
+Author: Merrie Bergmann, James Moor, Jack Nelson
+Publisher: McGraw-Hill Higher Education
+
+Select a book number to delete, or type "q" to quit:
 ```
 
 ### Using a different library file
@@ -157,8 +158,12 @@ relative to the repository's main directory.
 glibrary comes with a suite of unit tests, in the following files:
 ```
 tests/book_search_test.rb
+tests/command_line_parse_test.rb
+tests/exec_helper_test.rb
+tests/unit_tests.rb
 tests/user_book_test.rb
 tests/user_library_test.rb
+tests/user_prompt_test.rb
 ```
 
 Run all the tests at once with:
