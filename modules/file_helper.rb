@@ -3,14 +3,14 @@ require_relative 'errors'
 
 module FileHelper
 
-  def prepare_for_os(filename)
+  def self.prepare_for_os(filename)
     ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i } ? 
       filename.gsub(/\//, '\\') : filename 
   end
 
-  def prepare(filename)
+  def self.prepare(filename)
     filename = File.absolute_path(filename)
-    prepare_for_os(filename)
+    FileHelper.prepare_for_os(filename)
   end
 
 end
