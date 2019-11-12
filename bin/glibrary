@@ -18,12 +18,17 @@ include ExecHelper
 include UserPrompt
 include ErrorHandler
 
+CURRENT_DIR = File.join(File.dirname(__FILE__))
+
+DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR), 
+  "saved_libraries", "library.json" )
 
 process_args! # processes and modifies ARGV
-
 filename = FileHelper.prepare(DEFAULT_FILENAME)
+
 options = get_cli_options
-library_mode = options.nil? #options will be nil if library mode selected
+filename = options.delete(:filename) if options[:filename]
+library_mode = options.delete(:library_mode)
 
 if library_mode
 
@@ -35,7 +40,7 @@ if library_mode
 else
 
   with_search_mode_error_handling do
-    @persistent_library = UserLibrary.new(filename: @filename)
+    @persistent_library = UserLibrary.new(filename: filename)
     @temp_booklist = UserLibrary.new(nonpersistent: true)
 
     search_results = BookSearch.new(options)

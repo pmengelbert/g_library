@@ -15,7 +15,6 @@ end
 
 def get_cli_options
   options = {}
-  filename = FileHelper::DEFAULT_FILENAME
   OptionParser.new do |opts|
     opts.banner = "Usage: glibrary [options...] [query]"
 
@@ -34,10 +33,11 @@ def get_cli_options
     opts.on("-f", "--lib-file=LIBFILE",
             "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
       abort_library_mode if ARGV.include?("-l") && !File.exist?(filename)
+      options[:filename] = libfile
     end
 
     opts.on("-l", "--library", "See your reading list; ignores all search options") do
-      return
+      return { filename: options[:filename], library_mode: true }
     end
 
     opts.on("-h", "--help", "Prints this help") do

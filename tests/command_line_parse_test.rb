@@ -48,7 +48,7 @@ class CommandLineParseTest < Test::Unit::TestCase
     ARGV << "-f"
     ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
     options = get_cli_options
-    assert options.nil?
+    assert options[:library_mode]
   end
 
 end
