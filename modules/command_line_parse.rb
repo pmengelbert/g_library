@@ -1,4 +1,5 @@
 require 'optparse'
+require_relative 'file_helper'
 
 def abort_library_mode
   puts "Library file not found, cannot display."
@@ -14,6 +15,7 @@ end
 
 def get_cli_options
   options = {}
+  filename = FileHelper::DEFAULT_FILENAME
   OptionParser.new do |opts|
     opts.banner = "Usage: glibrary [options...] [query]"
 

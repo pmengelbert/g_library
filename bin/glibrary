@@ -19,10 +19,6 @@ include UserPrompt
 include ErrorHandler
 
 
-CURRENT_DIR = File.join(File.dirname(__FILE__))
-DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR), 
-  "saved_libraries", "library.json" )
-
 process_args! # processes and modifies ARGV
 
 filename = FileHelper.prepare(DEFAULT_FILENAME)

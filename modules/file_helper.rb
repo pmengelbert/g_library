@@ -1,7 +1,11 @@
-#assumes a @filename instance variable in the including class.
 require_relative 'errors'
 
 module FileHelper
+
+  CURRENT_DIR = File.join(File.dirname(__FILE__))
+
+  DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR), 
+    "saved_libraries", "library.json" )
 
   def self.prepare_for_os(filename)
     ENV.values.any? { |v| v =~ /[A-Z]:\\Windows/i } ? 
