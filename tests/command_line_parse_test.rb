@@ -27,20 +27,20 @@ class CommandLineParseTest < Test::Unit::TestCase
     %w[-t potter -a rowling -p blablabla].each do |s|
       ARGV << s
     end
-    command_line_parse!
-    assert @options[:title] == "potter" &&
-      @options[:author] == "rowling" &&
-      @options[:publisher] == "blablabla"
+    options = command_line_parse!
+    assert options[:title] == "potter" &&
+      options[:author] == "rowling" &&
+      options[:publisher] == "blablabla"
   end
 
   def test_command_line_parse_search_mode_with_alternative_flags
     %w[--title potter --author rowling --publisher blablabla].each do |s|
       ARGV << s
     end
-    command_line_parse!
-    assert @options[:title] == "potter" &&
-      @options[:author] == "rowling" &&
-      @options[:publisher] == "blablabla"
+    options = command_line_parse!
+    assert options[:title] == "potter" &&
+      options[:author] == "rowling" &&
+      options[:publisher] == "blablabla"
   end
 
   def test_command_line_parse_library_mode

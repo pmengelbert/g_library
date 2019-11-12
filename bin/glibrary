@@ -25,9 +25,8 @@ DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR),
 
 process_args!
 
-@options = {}
 @filename = DEFAULT_FILENAME
-command_line_parse! #this function processes @filename and fills the @options hash.
+options = command_line_parse!
 
 prepare_filename_for_os!
 

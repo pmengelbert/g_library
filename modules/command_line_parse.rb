@@ -16,30 +16,37 @@ module CommandLineParse
     puts ""
   end
 
+
+
+  def process_filename!
+    @filename = File.absolute_path(libfile)
+    handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
+  end
+
   def command_line_parse!
+    options = {}
     OptionParser.new do |opts|
       opts.banner = "Usage: glibrary [options...] [query]"
 
       opts.on("-t", "--title=TITLE", "Specify a title keyword") do |t|
-        @options[:title] = t
+        options[:title] = t
       end
 
       opts.on("-a", "--author=AUTHOR", "Specify an author keyword") do |a|
-        @options[:author] = a
+        options[:author] = a
       end
 
       opts.on("-p", "--publisher=PUBLISHER", "Specify a publisher keyword") do |p|
-        @options[:publisher] = p
+        options[:publisher] = p
       end
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        @filename = File.absolute_path(libfile)
-        handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
+        process_filename!
       end
 
       opts.on("-l", "--library", "See your reading list; ignores all search options") do
-        @options = nil
+        options = nil
         return
       end
 
@@ -49,7 +56,9 @@ module CommandLineParse
       end
     end.parse!
 
-   @options[:search] = ARGV.join('+')
-    
+   options[:search] = ARGV.join('+')
+
+   options
   end
+
 end
