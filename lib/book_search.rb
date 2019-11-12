@@ -46,6 +46,11 @@ class BookSearch
 
   private 
     class << self
+
+      def make_url(args)
+        (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
+      end
+
       def make_url_arg_list(args)
         url = ["?q="]
 
@@ -73,13 +78,8 @@ class BookSearch
         end
       end
 
-
       def format_hash(hash)
         hash['volumeInfo'].merge( { 'id' => hash['id'] } )
-      end
-
-      def make_url(args)
-        (BASE_API_URL + make_url_arg_list(args)).gsub(/ /, "+")
       end
 
       def args
