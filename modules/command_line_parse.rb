@@ -16,12 +16,6 @@ module CommandLineParse
     puts ""
   end
 
-
-
-  def process_filename!(libfile)
-    @filename = File.absolute_path(libfile)
-  end
-
   def get_cli_options
     options = {}
     OptionParser.new do |opts|
