@@ -1,7 +1,7 @@
 require 'json'
 require_relative '../modules/api_query'
-require_relative '../modules/google_api_url'
-require_relative '../modules/errors'
+require_relative '../globals/google_api_url'
+require_relative '../globals/errors'
 
 class BookSearch
   include ApiQuery

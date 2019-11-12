@@ -1,4 +1,4 @@
-require_relative 'errors'
+require_relative '../globals/errors'
 
 def verify_selection(selection, regexp)
   raise SelectionError unless selection =~ regexp

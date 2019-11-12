@@ -1,4 +1,4 @@
-require_relative 'errors'
+require_relative '../globals/errors'
 
 module FileHelper
   def self.prepare_for_os(filename)

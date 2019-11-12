@@ -1,6 +1,6 @@
 require 'test/unit'
 
-require_relative '../modules/exec_helper.rb'
+require_relative '../exec_helpers/exec_helper.rb'
 require_relative '../lib/book_search.rb'
 require_relative '../lib/user_library.rb'
 

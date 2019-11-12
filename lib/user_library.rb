@@ -1,5 +1,5 @@
 require 'json'
-require_relative '../modules/errors'
+require_relative '../globals/errors'
 require_relative '../modules/file_helper'
 require_relative 'user_book'
 

@@ -1,6 +1,6 @@
 require 'test/unit'
-require_relative '../modules/exec_helper.rb'
-require_relative '../modules/errors'
+require_relative '../exec_helpers/exec_helper.rb'
+require_relative '../globals/errors'
 require_relative '../lib/book_search.rb'
 
 class TestExecHelper < Test::Unit::TestCase

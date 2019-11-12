@@ -1,4 +1,4 @@
-require_relative 'errors'
+require_relative '../globals/errors'
 
 def with_library_mode_error_handling
   begin

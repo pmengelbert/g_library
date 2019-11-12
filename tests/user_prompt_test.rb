@@ -1,6 +1,6 @@
 require 'test/unit'
-require_relative '../modules/user_prompt'
-require_relative '../modules/errors'
+require_relative '../exec_helpers/user_prompt'
+require_relative '../globals/errors'
 require_relative '../lib/user_library'
 require_relative '../lib/book_search'
 

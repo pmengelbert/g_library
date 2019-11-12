@@ -1,5 +1,5 @@
 require 'json'
-require_relative '../modules/errors'
+require_relative '../globals/errors'
 
 class UserBook
   

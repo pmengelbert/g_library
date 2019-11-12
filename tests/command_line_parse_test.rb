@@ -1,6 +1,6 @@
 require 'test/unit'
-require_relative '../modules/errors/'
-require_relative '../modules/command_line_parse'
+require_relative '../globals/errors/'
+require_relative '../exec_helpers/command_line_parse'
 
 class CommandLineParseTest < Test::Unit::TestCase
   

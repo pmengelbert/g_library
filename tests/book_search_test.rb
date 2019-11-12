@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../modules/errors'
+require_relative '../globals/errors'
 require_relative '../lib/book_search.rb'
 
 class TestBookSearch < Test::Unit::TestCase

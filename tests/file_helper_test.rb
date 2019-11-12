@@ -1,6 +1,6 @@
 require 'test/unit'
 require_relative '../modules/file_helper.rb'
-require_relative '../modules/errors'
+require_relative '../globals/errors'
 
 class TestFileHelper < Test::Unit::TestCase
   
