@@ -51,13 +51,4 @@ class CommandLineParseTest < Test::Unit::TestCase
     assert options.nil?
   end
 
-  def test_command_line_parse_filename_caught
-    %w[-t hello].each { |s| ARGV << s }
-    ARGV << "-f"
-    ARGV << File.join(File.expand_path("..", File.dirname(__FILE__)), "saved_libraries", "tmp.json")
-    get_cli_options
-    puts @filename
-    assert @filename =~ /.*tmp\.json\Z/
-  end
-
 end

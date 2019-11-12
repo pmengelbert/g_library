@@ -4,9 +4,9 @@ module CommandLineParse
   require 'optparse'
   include Errors
 
-  def handle_nonexistent_file
-    (puts "Library file not found, cannot display."; exit)
-    puts "Creating new file"
+  def abort_library_mode
+    puts "Library file not found, cannot display."
+    exit
   end
 
   def print_help_message(opts)
@@ -20,7 +20,6 @@ module CommandLineParse
 
   def process_filename!(libfile)
     @filename = File.absolute_path(libfile)
-    handle_nonexistent_file if ARGV.include?("-l") && !File.exist?(@filename)
   end
 
   def get_cli_options
@@ -42,7 +41,7 @@ module CommandLineParse
 
       opts.on("-f", "--lib-file=LIBFILE",
               "Select a library save file. Otherwise, a default save file will be used.") do |libfile|
-        process_filename!(libfile)
+        abort_library_mode if ARGV.include?("-l") && !File.exist?(filename)
       end
 
       opts.on("-l", "--library", "See your reading list; ignores all search options") do

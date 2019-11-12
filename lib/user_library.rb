@@ -1,12 +1,12 @@
 require 'json'
 require_relative '../modules/errors'
-require_relative '../modules/exec_helper'
+require_relative '../modules/file_helper'
 require_relative 'user_book'
 
 
 class UserLibrary
   include Enumerable
-  include ExecHelper
+  include FileHelper
   include Errors
 
   attr_reader :books, :filename
@@ -96,13 +96,12 @@ class UserLibrary
 
     def set_filename(name)
       @nonpersistent = false
-      @filename = name
-      prepare_filename_for_os!
+      @filename = prepare(name)
+      
     end
 
     def determine_filename!
-      @filename = File.absolute_path(@filename)
-      prepare_filename_for_os!
+      @filename = prepare(@filename)
     end
 
     def get_raw_JSON_data

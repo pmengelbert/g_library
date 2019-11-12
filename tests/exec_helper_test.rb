@@ -13,14 +13,6 @@ class TestExecHelper < Test::Unit::TestCase
     assert args[-1] == "-l"
   end
 
-  def test_method_prepare_filename_for_os!
-    @filename = "/home/pme/"
-    ENV["test"] = "C:\\Windows"
-    prepare_filename_for_os!
-    ENV.delete("test")
-    assert @filename =~ /\\/
-  end
-
   #assumes internet connection
   def test_perform_search_with_successful_search
     @options = { search: "harry potter", title: "azkaban", author: "rowling" }
