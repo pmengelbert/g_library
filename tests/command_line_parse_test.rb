@@ -3,7 +3,7 @@ require_relative '../modules/errors/'
 require_relative '../modules/command_line_parse'
 
 class CommandLineParseTest < Test::Unit::TestCase
-  include CommandLineParse
+  
   include Errors
 
   def setup

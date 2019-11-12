@@ -8,7 +8,7 @@ class BookSearch
   include Enumerable
   include Errors
 
-  attr_reader :selected_results, :full_results, :url
+  attr_reader :selected, :full_results, :url
 
   def initialize(args)
     @args = args.dup
@@ -30,18 +30,18 @@ class BookSearch
     num = full_results['totalItems']
     raise NoResults unless num > 0
 
-    @selected_results = full_results['items'].first(num_results)
-    @selected_results.map! { |res| self.class.format_hash res }
+    @selected = full_results['items'].first(num_results)
+    @selected.map! { |res| self.class.format_hash res }
 
   end
 
   def each
     return to_enum :each unless block_given?
-    selected_results.each { |r| yield(r) }
+    selected.each { |r| yield(r) }
   end
 
   def [](index)
-    selected_results[index]
+    selected[index]
   end
 
   private 

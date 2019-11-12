@@ -6,7 +6,6 @@ require_relative 'user_book'
 
 class UserLibrary
   include Enumerable
-  include FileHelper
   include Errors
 
   attr_reader :books, :filename
@@ -96,12 +95,11 @@ class UserLibrary
 
     def set_filename(name)
       @nonpersistent = false
-      @filename = prepare(name)
-      
+      @filename = FileHelper.prepare(name)
     end
 
     def determine_filename!
-      @filename = prepare(@filename)
+      @filename = FileHelper.prepare(@filename)
     end
 
     def get_raw_JSON_data

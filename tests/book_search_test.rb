@@ -36,6 +36,18 @@ class TestBookSearch < Test::Unit::TestCase
     assert !@s.send(:correct_response_code?, r1)
     assert @s.send(:correct_response_code?, r2)
   end
+  #
+  #assumes internet connection
+  def test_search_with_successful_search
+    options = { search: "harry potter", title: "azkaban", author: "rowling" }
+    assert_nothing_raised( Exception ) { BookSearch.new(options) }
+  end
+
+  def test_perform_search_with_bad_search
+    options = { search: "2039iodwioujoi\\erw4093" }
+    assert_raise( NoResults ) { BookSearch.new(options) }
+  end
+
 
   def test_url_making_function_with_proper_input
     assert_equal @s.url,

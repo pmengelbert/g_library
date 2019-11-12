@@ -16,9 +16,8 @@ require_relative '../lib/user_library'
 
 include ExecHelper
 include UserPrompt
-include CommandLineParse
 include ErrorHandler
-include FileHelper
+
 
 CURRENT_DIR = File.join(File.dirname(__FILE__))
 DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR), 
@@ -26,10 +25,11 @@ DEFAULT_FILENAME =  File.join( File.expand_path("..", CURRENT_DIR),
 
 process_args! # processes and modifies ARGV
 
-filename = prepare(DEFAULT_FILENAME)
+filename = FileHelper.prepare(DEFAULT_FILENAME)
 options = get_cli_options
+library_mode = options.nil? #options will be nil if library mode selected
 
-if library_mode?
+if library_mode
 
   with_library_mode_error_handling do
     (@library = UserLibrary.new(filename: @filename)).pretty_print
@@ -42,8 +42,8 @@ else
     @persistent_library = UserLibrary.new(filename: @filename)
     @temp_booklist = UserLibrary.new(nonpersistent: true)
 
-    search_results = perform_search
-    search_results.selected_results.each { |info| @temp_booklist.add(UserBook.new(info)) }
+    search_results = BookSearch.new(options)
+    search_results.selected.each { |info| @temp_booklist.add(UserBook.new(info)) }
     @temp_booklist.pretty_print
 
     search_mode_user_prompt
